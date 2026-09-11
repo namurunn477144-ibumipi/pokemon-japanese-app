@@ -6,20 +6,22 @@
   <title>こくごクイズ - いぶちゃん・みーちゃん・ゆづちゃん</title>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ベース：きそモード（藤色・パープル系） */
+    /* ベース：かんたんモード（藤色・パープル系） */
     :root {
-      --primary: #9C27B0; --primary-shadow: #7B1FA2;
+      --primary: #8E24AA; --primary-shadow: #6A1B9A;
       --secondary: #FFB300; --secondary-shadow: #FF8F00;
       --bg-color: #F3E5F5; --card-bg: #FFFFFF;
       --text-main: #4A148C; --correct: #4CAF50; --incorrect: #F44336;
-      --bg-dot: #E1BEE7;
+      --bg-dot: #CE93D8;
     }
     
-    /* ひろがるモード（さくら色・ピンク系） */
+    /* チャレンジモード（鮮やかなサクラピンク系：色味の差を強調） */
     body.mode-applied {
-      --primary: #E91E63; --primary-shadow: #C2185B;
-      --secondary: #00BCD4; --secondary-shadow: #0097A7;
-      --bg-color: #FCE4EC; --bg-dot: #F8BBD0;
+      --primary: #D81B60; --primary-shadow: #AD1457;
+      --secondary: #00ACC1; --secondary-shadow: #00838F;
+      --bg-color: #FCE4EC; --card-bg: #FFFFFF;
+      --text-main: #880E4F;
+      --bg-dot: #F48FB1;
     }
 
     * { box-sizing: border-box; font-family: 'M PLUS Rounded 1c', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -32,24 +34,24 @@
     .app-header { text-align: center; margin-bottom: 10px; }
     #main-title { font-size: 2rem; color: var(--primary-shadow); line-height: 1.2; text-shadow: 2px 2px 0px #FFF; margin: 10px 0; transition: color 0.5s; }
     
-    /* ベースのステージ */
+    /* ステージ背景の設定 */
     .partner-stage { position: relative; width: 100%; border-radius: 24px; padding: 40px 20px 20px; border: 4px solid #FFF; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: background 0.5s; }
     
-    /* ① イーブイ＆可愛い系用：ラブリーステージ */
+    /* ① ラブリー背景（初期） */
     .partner-stage.bg-lovely { background: linear-gradient(180deg, #FFF0F5 0%, #FFD1DC 100%); }
     .partner-stage.bg-lovely::before { content: '💖✨'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.7; }
     .partner-stage.bg-lovely::after { content: '✨💖'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.7; }
 
-    /* ② 2段階最終進化用：カッコいいステージ */
+    /* ② うみ背景（1段階進化後） */
+    .partner-stage.bg-sea { background: linear-gradient(180deg, #E0F7FA 0%, #80DEEA 100%); border-color: #4FC3F7; }
+    .partner-stage.bg-sea::before { content: '🌊🐚'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.8; }
+    .partner-stage.bg-sea::after { content: '🐬🌊'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.8; }
+
+    /* ③ カッコいい背景（2段階最終進化後） */
     .partner-stage.bg-cool { background: linear-gradient(180deg, #2A0845 0%, #6441A5 100%); border-color: #FFD700; }
     .partner-stage.bg-cool::before { content: '⚡⭐'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.8; }
     .partner-stage.bg-cool::after { content: '⭐⚡'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.8; }
     .partner-stage.bg-cool #partner-name { color: #FFD700; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-
-    /* ③ ゴンベなど自然系用：くさむらステージ */
-    .partner-stage.bg-grass { background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 100%); }
-    .partner-stage.bg-grass::before { content: '🌱🍀'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.7; }
-    .partner-stage.bg-grass::after { content: '🍀🌱'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.7; }
 
     #partner-image { width: 160px; height: 160px; object-fit: contain; filter: drop-shadow(0 8px 6px rgba(0,0,0,0.2)); animation: float 3s ease-in-out infinite; transition: transform 0.3s; z-index: 5; position: relative; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
@@ -95,8 +97,8 @@
     .btn-large { width: 100%; padding: 16px; font-size: 1.4rem; }
     .btn-primary { background: var(--secondary); color: white; box-shadow: 0 8px 0 var(--secondary-shadow); }
     .btn-primary:active { transform: translateY(8px); box-shadow: 0 0 0 var(--secondary-shadow); }
-    .btn-danger { background: #4CAF50; color: white; box-shadow: 0 8px 0 #388E3C; } 
-    .btn-danger:active { transform: translateY(8px); box-shadow: 0 0 0 #388E3C; }
+    .btn-danger { background: #E91E63; color: white; box-shadow: 0 8px 0 #C2185B; } 
+    .btn-danger:active { transform: translateY(8px); box-shadow: 0 0 0 #C2185B; }
     .btn-outline { background: #FFF; color: var(--primary-shadow); border: 3px solid var(--primary); box-shadow: 0 6px 0 var(--primary); }
     .btn-outline:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary); }
     
@@ -135,12 +137,12 @@
 
 <div id="app">
   <div id="room-view" class="view active">
-    <header class="app-header"><h1 id="main-title">こくご きそクイズ</h1></header>
+    <header class="app-header"><h1 id="main-title">こくご かんたんクイズ</h1></header>
     <div id="partner-stage" class="partner-stage bg-lovely" onclick="interactPokemon()">
       <div id="poke-comment" class="poke-comment">がんばろうね！</div>
       <img id="partner-image" src="" alt="パートナー">
       <div id="eating-msg" class="eating-msg">もぐもぐ♪</div>
-      <h2 id="partner-name">読み込み中...</h2>
+      <h2 id="partner-name">イーブイ</h2>
     </div>
     <div class="status-board">
       <div class="exp-header"><span class="exp-label">なかよし度</span><span class="exp-value"><span id="exp-text">0</span>%</span></div>
@@ -151,8 +153,8 @@
       <div id="food-list" class="food-list"></div>
     </div>
     <div class="action-buttons">
-      <button id="start-quiz-btn" class="btn btn-primary btn-large">きそクイズ (4もん)</button>
-      <button id="mode-toggle-btn" class="btn btn-outline btn-large" style="margin-top:5px;">🔄 ひろがるモードにきりかえ</button>
+      <button id="start-quiz-btn" class="btn btn-primary btn-large">かんたんクイズ (4もん)</button>
+      <button id="mode-toggle-btn" class="btn btn-outline btn-large" style="margin-top:5px;">🔄 チャレンジクイズにきりかえ</button>
       <button id="reset-game-btn" class="btn btn-danger btn-large" style="margin-top:5px; display:none;">あたらしいポケモンとあそぶ🔄</button>
     </div>
   </div>
@@ -178,7 +180,14 @@
 </div>
 
 <script>
-  // 24種類のポケモンファミリー（2段階進化）
+  // きそ（かんたん）モード用：イーブイ（133）とその進化系
+const eeveeEvolutions = [
+  { id: 134, name: "シャワーズ" }, { id: 135, name: "サンダース" }, { id: 136, name: "ブースター" },
+  { id: 196, name: "エーフィ" }, { id: 197, name: "ブラッキー" }, { id: 470, name: "リーフィア" },
+  { id: 471, name: "グレイシア" }, { id: 700, name: "ニンフィア" }
+];
+
+// チャレンジモード用：24種類のポケモンファミリー（2段階進化）
 const pokemonFamilies = [
   { stage0: {id: 172, name: "ピチュー"}, stage1: {id: 25, name: "ピカチュウ"}, stage2: {id: 26, name: "ライチュウ"} },
   { stage0: {id: 92, name: "ゴース"}, stage1: {id: 93, name: "ゴースト"}, stage2: {id: 94, name: "ゲンガー"} },
@@ -218,10 +227,11 @@ const effectEmojis = ["💖", "✨", "⭐", "🎵"];
 const correctTexts = ["せいかい！すごい！", "かんぺき！", "すばらしい！", "やったね！", "さすが！"];
 const incorrectTexts = ["おしい！もういちど！", "どんまい！", "つぎは がんばろう！", "ファイト！", "ざんねん！"];
 
-const correctVoices = ["やったー！せいかい！", "すごい！大せいかい！", "かんぺき！さすがだね！", "やったね！その調子！"];
-const incorrectVoices = ["おしい！もう一回！", "ざんねん！どんまい！", "おしい！あとすこし！"];
+// 算数アプリと統一したボイス
+const correctVoices = ["やったー！", "せいかい！", "Great!", "Good job!"];
+const incorrectVoices = ["おしい！", "もういっかい！", "Oh no!", "Almost!"];
 
-// 【きそモード】問題データ
+// 【かんたんモード】問題データ
 const baseQ1 = [
   { text: "ママ ( ___ ) ゴロゴロする。", correct: "が", options: ["が", "を", "へ", "に"] },
   { text: "パパ ( ___ ) ゆづちゃんと あそぶ。", correct: "が", options: ["が", "を", "へ", "に"] },
@@ -260,7 +270,7 @@ const baseQ4 = [
   { text: "「はやい」の はんたいは？", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
   { text: "「あかるい」の はんたいは？", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] }
 ];
-  // 【ひろがるモード】問題データ
+  // 【チャレンジモード】問題データ
 const appliedQ1 = [
   { text: "「山」は なんて よむ？", correct: "やま", options: ["やま", "かわ", "うみ", "そら"] },
   { text: "「川」は なんて よむ？", correct: "かわ", options: ["かわ", "やま", "いけ", "みず"] },
@@ -300,7 +310,7 @@ const appliedQ4 = [
   function getPokemonImageUrl(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`; }
 
 let isAppliedMode = false;
-let baseState = { exp: 0, keys: 0, stage: 0, familyIdx: -1, foods: [] };
+let baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
 let appliedState = { exp: 0, keys: 0, stage: 0, familyIdx: -1, foods: [] };
 
 let synthVoices = [];
@@ -313,7 +323,7 @@ const resetGameBtn = document.getElementById('reset-game-btn');
 const partnerStage = document.getElementById('partner-stage');
 
 function initBaseMode() {
-  baseState = { exp: 0, keys: 0, stage: 0, familyIdx: Math.floor(Math.random() * pokemonFamilies.length), foods: [] };
+  baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
   baseState.foods = [...allFoods].sort(() => 0.5 - Math.random()).slice(0, 4).map(f => ({ ...f, isEaten: false }));
 }
 function initAppliedMode() {
@@ -322,24 +332,34 @@ function initAppliedMode() {
 }
 
 function getCurrentPoke() {
-  const currentState = isAppliedMode ? appliedState : baseState;
-  const family = pokemonFamilies[currentState.familyIdx];
-  if (currentState.stage === 0) return family.stage0;
-  if (currentState.stage === 1) return family.stage1;
-  return family.stage2;
+  if (!isAppliedMode) {
+    return { id: baseState.partnerId, name: baseState.partnerName };
+  } else {
+    const family = pokemonFamilies[appliedState.familyIdx];
+    if (appliedState.stage === 0) return family.stage0;
+    if (appliedState.stage === 1) return family.stage1;
+    return family.stage2;
+  }
 }
 
-// 【自動背景切り替え】進化段階やタイプに応じた背景変更
+// 【進化段階に応じた背景変更】初期:ラブリー / 1段階:うみ🌊 / 2段階:カッコいい⚡
 function updateStageBackground() {
-  partnerStage.classList.remove('bg-lovely', 'bg-cool', 'bg-grass');
-  const currentState = isAppliedMode ? appliedState : baseState;
+  partnerStage.classList.remove('bg-lovely', 'bg-sea', 'bg-cool');
   
-  // 最終進化段階（2段階進化後）はカッコいい背景に！
-  if (currentState.stage === 2) {
-    partnerStage.classList.add('bg-cool');
+  if (!isAppliedMode) {
+    if (baseState.isEvolved) {
+      partnerStage.classList.add('bg-cool'); // イーブイ進化後
+    } else {
+      partnerStage.classList.add('bg-lovely'); // イーブイ初期
+    }
   } else {
-    // それ以外はラブリーなピンク背景
-    partnerStage.classList.add('bg-lovely');
+    if (appliedState.stage === 0) {
+      partnerStage.classList.add('bg-lovely'); // 初期
+    } else if (appliedState.stage === 1) {
+      partnerStage.classList.add('bg-sea'); // 1段階進化後は「うみ」背景！
+    } else {
+      partnerStage.classList.add('bg-cool'); // 2段階最終進化後
+    }
   }
 }
 
@@ -349,12 +369,12 @@ function renderRoom() {
   partnerImg.src = getPokemonImageUrl(currentPoke.id);
   partnerName.innerText = currentPoke.name;
   
-  updateStageBackground(); // 背景を更新
+  updateStageBackground();
   
   const currentState = isAppliedMode ? appliedState : baseState;
   expText.innerText = currentState.exp; expBar.style.width = currentState.exp + "%";
   
-  if (currentState.stage === 2) {
+  if ((!isAppliedMode && baseState.isEvolved) || (isAppliedMode && appliedState.stage === 2)) {
     resetGameBtn.style.display = 'inline-flex';
   } else {
     resetGameBtn.style.display = 'none';
@@ -367,7 +387,7 @@ function renderRoom() {
     else if (!isUnlocked) { foodEl.className = 'food-item locked'; foodEl.innerText = food.emoji; }
     else { 
       foodEl.className = 'food-item'; foodEl.innerText = food.emoji; 
-      if (currentState.stage < 2) {
+      if ((!isAppliedMode && !baseState.isEvolved) || (isAppliedMode && appliedState.stage < 2)) {
         foodEl.onclick = () => feedPartner(index, foodEl); 
       }
     }
@@ -431,10 +451,19 @@ function feedPartner(index, element) {
       msg.style.opacity = 0; msg.style.transform = "translate(-50%, 0)"; partnerImg.classList.remove("anim-chew");
       currentState.exp = Math.min(100, currentState.exp + 25);
       
-      const family = pokemonFamilies[currentState.familyIdx];
-      if (currentState.exp === 50 && currentState.stage === 0) { currentState.stage = 1; evolveAnim(family.stage1); }
-      else if (currentState.exp === 100 && currentState.stage === 1) { currentState.stage = 2; evolveAnim(family.stage2); }
-      else { renderRoom(); }
+      if (!isAppliedMode) {
+        if (baseState.exp === 100 && !baseState.isEvolved) {
+          baseState.isEvolved = true;
+          const evo = eeveeEvolutions[Math.floor(Math.random() * eeveeEvolutions.length)];
+          baseState.partnerId = evo.id; baseState.partnerName = evo.name;
+          evolveAnim(evo);
+        } else { renderRoom(); }
+      } else {
+        const family = pokemonFamilies[appliedState.familyIdx];
+        if (appliedState.exp === 50 && appliedState.stage === 0) { appliedState.stage = 1; evolveAnim(family.stage1); }
+        else if (appliedState.exp === 100 && appliedState.stage === 1) { appliedState.stage = 2; evolveAnim(family.stage2); }
+        else { renderRoom(); }
+      }
     }, 1000);
   }, 550);
 }
@@ -459,15 +488,15 @@ document.getElementById('mode-toggle-btn').onclick = () => {
   isAppliedMode = !isAppliedMode;
   if(!isAppliedMode) {
     document.body.classList.remove('mode-applied');
-    document.getElementById('main-title').innerText = "こくご きそクイズ";
-    document.getElementById('start-quiz-btn').innerText = "きそクイズ (4もん)";
-    document.getElementById('mode-toggle-btn').innerHTML = "🔄 ひろがるモードにきりかえ";
+    document.getElementById('main-title').innerText = "こくご かんたんクイズ";
+    document.getElementById('start-quiz-btn').innerText = "かんたんクイズ (4もん)";
+    document.getElementById('mode-toggle-btn').innerHTML = "🔄 チャレンジクイズにきりかえ";
   } else {
     document.body.classList.add('mode-applied');
     if (appliedState.familyIdx === -1) initAppliedMode();
-    document.getElementById('main-title').innerText = "こくご ひろがるクイズ";
-    document.getElementById('start-quiz-btn').innerText = "ひろがるクイズ (4もん)";
-    document.getElementById('mode-toggle-btn').innerHTML = "🔄 きそモードにきりかえ";
+    document.getElementById('main-title').innerText = "こくご チャレンジクイズ";
+    document.getElementById('start-quiz-btn').innerText = "チャレンジクイズ (4もん)";
+    document.getElementById('mode-toggle-btn').innerHTML = "🔄 かんたんクイズにきりかえ";
   }
   renderRoom();
 };
@@ -516,7 +545,11 @@ function renderQuestionCard(container, dataList, titleText) {
     <div class="options-grid" id="q-opts"></div>
   `;
 
-  document.getElementById('q-voice-btn').onclick = () => speakWithPause(q.text, q.correct);
+  // 読み上げ時に ( ___ ) やカッコなどのアンダーバーを消去！
+  document.getElementById('q-voice-btn').onclick = () => {
+    let speakableText = q.text.replace(/\( ___ \)/g, ' ').replace(/[（\(][^）\)]*[）\)]/g, '');
+    speakJapaneseVoice(speakableText);
+  };
 
   const optsGrid = document.getElementById('q-opts');
   q.options.slice().sort(() => 0.5 - Math.random()).forEach(opt => {
@@ -528,20 +561,6 @@ function renderQuestionCard(container, dataList, titleText) {
   setTimeout(() => {
     document.getElementById('q-voice-btn').click();
   }, 300);
-}
-
-function speakWithPause(text1, text2) {
-  const msg1 = new SpeechSynthesisUtterance(text1);
-  msg1.lang = 'ja-JP';
-  if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
-  const jaVoice = synthVoices.find(v => v.lang.startsWith('ja'));
-  if (jaVoice) msg1.voice = jaVoice;
-  msg1.pitch = 1.1; msg1.rate = 0.9;
-  
-  msg1.onend = () => {
-    setTimeout(() => { speakJapaneseVoice(text2); }, 1000);
-  };
-  window.speechSynthesis.speak(msg1);
 }
 
 function speakJapaneseVoice(text) {
@@ -561,6 +580,7 @@ function checkAnswer(isCorrect, answerText) {
     icon.innerText = "⭕"; icon.style.color = "var(--correct)";
     text.innerHTML = `${correctTexts[Math.floor(Math.random() * correctTexts.length)]}<br><span style="font-size:1.8rem; color:var(--primary-shadow); display:block; margin-top:10px;">${answerText}</span>`;
     text.style.color = "var(--correct)";
+    // 答えの読み上げは行わず、正解ボイスのみ再生
     speakJapaneseVoice(correctVoices[Math.floor(Math.random() * correctVoices.length)]);
   } else {
     icon.innerText = "❌"; icon.style.color = "var(--incorrect)";
