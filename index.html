@@ -188,12 +188,9 @@ const incorrectTexts = ["おしい！もういちど！", "どんまい！", "�
 const correctVoices = ["やったー！", "せいかい！", "Great!", "Good job!"];
 const incorrectVoices = ["おしい！", "もういっかい！", "Oh no!", "Almost!"];
 
-/* --- 問題プール（全250問超） --- */
-
-// 【かんたん 1問目】助詞（全30問）
 const baseQ1 = [
   { text: "ママ ( ___ )<br>ゴロゴロする。", correct: "が", options: ["が", "を", "へ", "に"] },
-  { text: "パパ ( ___ )<br>あそぶ。", correct: "と", options: ["と", "を", "へ", "が"] },
+  { text: "パパ ( ___ )<br>あそぶ。", correct: "と", options: ["と", "を", "へ", "に"] },
   { text: "みーちゃん ( ___ )<br>こしょこしょする。", correct: "を", options: ["を", "は", "へ", "に"] },
   { text: "いぶちゃん ( ___ )<br>おかしを あげる。", correct: "に", options: ["に", "を", "へ", "が"] },
   { text: "りんご 🍎 ( ___ )<br>たべる。", correct: "を", options: ["を", "は", "へ", "に"] },
@@ -201,144 +198,83 @@ const baseQ1 = [
   { text: "テレビ 📺 ( ___ )<br>みる。", correct: "を", options: ["を", "は", "へ", "に"] },
   { text: "バス 🚌 ( ___ )<br>のる。", correct: "に", options: ["に", "を", "へ", "で"] },
   { text: "えほん 📖 ( ___ )<br>よむ。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "おふろ ♨️ ( ___ )<br>はいる。", correct: "に", options: ["に", "を", "へ", "で"] },
-  { text: "こうえん 🛝 ( ___ )<br>あそぶ。", correct: "で", options: ["で", "を", "へ", "に"] },
-  { text: "ジュース 🧃 ( ___ )<br>のむ。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "ベッド 🛏️ ( ___ )<br>ねる。", correct: "で", options: ["で", "を", "へ", "に"] },
-  { text: "おもちゃ ( ___ )<br>かたづける。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "ともだち ( ___ )<br>であう。", correct: "に", options: ["に", "を", "へ", "が"] },
-  { text: "うみ 🌊 ( ___ )<br>およぐ。", correct: "で", options: ["で", "を", "へ", "に"] },
-  { text: "て 🖐️ ( ___ )<br>あらう。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "くつ 👟 ( ___ )<br>はく。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "すべりだい ( ___ )<br>すべる。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "ブランコ ( ___ )<br>のる。", correct: "に", options: ["に", "を", "へ", "で"] },
-  { text: "いぬ 🐶 ( ___ )<br>あるく。", correct: "と", options: ["と", "を", "へ", "が"] },
-  { text: "おにいちゃん ( ___ )<br>走る。", correct: "より", options: ["より", "を", "へ", "に"] },
-  { text: "ピアノ 🎹 ( ___ )<br>ひく。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "うた 🎤 ( ___ )<br>うたう。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "しゃしん 📷 ( ___ )<br>とる。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "やま ⛰️ ( ___ )<br>のぼる。", correct: "に", options: ["に", "を", "へ", "で"] },
-  { text: "でんしゃ 🚃 ( ___ )<br>のる。", correct: "に", options: ["に", "を", "へ", "で"] },
-  { text: "は 🪥 ( ___ )<br>みがく。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "おうち 🏠 ( ___ )<br>かえる。", correct: "に", options: ["に", "を", "へ", "で"] },
-  { text: "かさ ☂️ ( ___ )<br>さす。", correct: "を", options: ["を", "は", "へ", "に"] }
+  { text: "こうえん 🛝 ( ___ )<br>あそぶ。", correct: "で", options: ["で", "に", "へ", "を"] },
+  { text: "おうち 🏠 ( ___ )<br>かえる。", correct: "へ", options: ["へ", "を", "は", "が"] },
+  { text: "ジュース 🧃 ( ___ )<br>のむ。", correct: "を", options: ["を", "に", "で", "へ"] },
+  { text: "て 🖐️ ( ___ )<br>あらう。", correct: "を", options: ["を", "に", "で", "へ"] },
+  { text: "いぬ 🐶 ( ___ )<br>はしる。", correct: "が", options: ["が", "を", "へ", "に"] },
+  { text: "あめ ☔️ ( ___ )<br>ふっている。", correct: "が", options: ["が", "を", "で", "に"] }
 ];
 
-// 【かんたん 2問目】特殊な読み（★全42問★）
 const baseQ2 = [
   { text: "「1日」は<br>なんて よむ？", correct: "ついたち", options: ["ついたち", "いちにち", "ふつか", "みっか"] },
   { text: "「2日」は<br>なんて よむ？", correct: "ふつか", options: ["ふつか", "ついたち", "みっか", "よっか"] },
   { text: "「3日」は<br>なんて よむ？", correct: "みっか", options: ["みっか", "ふつか", "よっか", "いつか"] },
-  { text: "「4日」は<br>なんて よむ？", correct: "よっか", options: ["よっか", "よんちに", "みっか", "いつか"] },
-  { text: "「5日」は<br>なんて よむ？", correct: "いつか", options: ["いつか", "ごにち", "むいか", "よっか"] },
-  { text: "「6日」は<br>なんて よむ？", correct: "むいか", options: ["むいか", "ろくにち", "いつか", "なのか"] },
-  { text: "「7日」は<br>なんて よむ？", correct: "なのか", options: ["なのか", "ななにち", "ようか", "むいか"] },
-  { text: "「8日」は<br>なんて よむ？", correct: "ようか", options: ["ようか", "はちにし", "ここのか", "なのか"] },
-  { text: "「9日」は<br>なんて よむ？", correct: "ここのか", options: ["ここのか", "くにおか", "とおか", "ようか"] },
-  { text: "「10日」は<br>なんて よむ？", correct: "とおか", options: ["とおか", "じゅうにち", "ここのか", "ついたち"] },
-  { text: "「14日」は<br>なんて よむ？", correct: "じゅうよっか", options: ["じゅうよっか", "じゅうよんにち", "じゅういつか", "じゅうむいか"] },
-  { text: "「20日」は<br>なんて よむ？", correct: "はつか", options: ["はつか", "にじゅうにち", "ふつか", "はたち"] },
-  { text: "「24日」は<br>なんて よむ？", correct: "にじゅうよっか", options: ["にじゅうよっか", "にじゅうよんにち", "にじゅういつか", "はつか"] },
+  { text: "「4日」は<br>なんて よむ？", correct: "よっか", options: ["よっか", "みっか", "いつか", "むいか"] },
+  { text: "「5日」は<br>なんて よむ？", correct: "いつか", options: ["いつか", "よっか", "むいか", "なのか"] },
   { text: "「1人」は<br>なんて よむ？", correct: "ひとり", options: ["ひとり", "いちにん", "ひと", "ふたり"] },
   { text: "「2人」は<br>なんて よむ？", correct: "ふたり", options: ["ふたり", "ににん", "ひとり", "ふた"] },
-  { text: "「4人」は<br>なんて よむ？", correct: "よにん", options: ["よにん", "よんにん", "しにん", "よんひと"] },
-  { text: "「20歳」は<br>なんて よむ？", correct: "はたち", options: ["はたち", "にじゅっさい", "はつか", "ふたち"] },
-  { text: "「今年」は<br>なんて よむ？", correct: "ことし", options: ["ことし", "こんねん", "いまとし", "きょねん"] },
-  { text: "「去年」は<br>なんて よむ？", correct: "きょねん", options: ["きょねん", "さくねん", "きょとし", "まえとし"] },
-  { text: "「来年」は<br>なんて よむ？", correct: "らいねん", options: ["らいねん", "くるとし", "あしたのとし", "つぎとし"] },
-  { text: "「昨日」は<br>なんて よむ？", correct: "きのう", options: ["きのう", "さくじつ", "あした", "おととい"] },
-  { text: "「明日」は<br>なんて よむ？", correct: "あした", options: ["あした", "みょうにち", "きのう", "あさって"] },
-  { text: "「一昨日は<br>なんて よむ？", correct: "おととい", options: ["おととい", "きのう", "あさって", "さくさくじつ"] },
-  { text: "「明後日」は<br>なんて よむ？", correct: "あさって", options: ["あさって", "あした", "おととい", "まいにち"] },
-  { text: "「今朝」は<br>なんて よむ？", correct: "けさ", options: ["けさ", "いまあさ", "こんあさ", "きょうあさ"] },
-  { text: "「今夜」は<br>なんて よむ？", correct: "こんや", options: ["こんや", "いまよる", "きょうよる", "こんばん"] },
-  { text: "「大人の<br>なんて よむ？", correct: "おとな", options: ["おとな", "だいじん", "おおひと", "たいじん"] },
-  { text: "「小児」は<br>なんて よむ？", correct: "しょうに", options: ["しょうに", "ちいさいこ", "こども", "しょうじ"] },
-  { text: "「眼鏡」は<br>なんて よむ？", correct: "めがね", options: ["めがね", "がんきょう", "めかがみ", "めだま"] },
-  { text: "「時計」は<br>なんて よむ？", correct: "とけい", options: ["とけい", "じけい", "ときけい", "とけ"] },
-  { text: "「土産」は<br>なんて よむ？", correct: "みやげ", options: ["みやげ", "どさん", "どさん", "とちさん"] },
-  { text: "「果物」は<br>なんて よむ？", correct: "くだもの", options: ["くだもの", "かぶつ", "はもの", "かじつ"] },
-  { text: "「紅葉」は<br>なんて よむ？", correct: "もみじ", options: ["もみじ", "こうよう", "あかば", "べには"] },
-  { text: "「桜」は<br>なんて よむ？", correct: "さくら", options: ["さくら", "おう", "うめ", "もも"] },
-  { text: "「梅」は<br>なんて よむ？", correct: "うめ", options: ["うめ", "ばい", "さくら", "すもも"] },
-  { text: "「風邪」は<br>なんて よむ？", correct: "かぜ", options: ["かぜ", "ふうじゃ", "かぜじゃ", "ふうえ"] },
-  { text: "「裸足」は<br>なんて よむ？", correct: "はだし", options: ["はだし", "らそく", "はだあし", "はあし"] },
-  { text: "「足袋」は<br>なんて よむ？", correct: "たび", options: ["たび", "あしぶくろ", "そくたい", "あしたい"] },
-  { text: "「浴衣」は<br>なんて よむ？", correct: "ゆかた", options: ["ゆかた", "よくい", "ゆぎ", "ふろぎ"] },
-  { text: "「畳」は<br>なんて よむ？", correct: "たたみ", options: ["たたみ", "じょう", "たたみぐさ", "畳む"] },
-  { text: "「部屋」は<br>なんて よむ？", correct: "へや", options: ["へや", "ぶや", "べや", "おく"] },
-  { text: "「本棚」は<br>なんて よむ？", correct: "ほんだな", options: ["ほんだな", "ほんたな", "ほんしゃ", "ほんばこ"] }
+  { text: "きょうの<br>まえの ひは？", correct: "きのう", options: ["きのう", "あした", "おととい", "あさって"] },
+  { text: "きょうの<br>つぎの ひは？", correct: "あした", options: ["あした", "きのう", "あさって", "おととい"] },
+  { text: "あしたの<br>つぎの ひは？", correct: "あさって", options: ["あさって", "きのう", "あした", "おととい"] },
+  { text: "ひるの<br>まえの じかんは？", correct: "あさ", options: ["あさ", "よる", "ゆうがた", "よなか"] },
+  { text: "ごはんをたべる<br>「あさ」の つぎは？", correct: "ひる", options: ["ひる", "よる", "ゆうがた", "よなか"] },
+  { text: "おほしさまが でる<br>じかんは？", correct: "よる", options: ["よる", "あさ", "ひる", "ゆうがた"] },
+  { text: "あたたかい<br>「はる」の つぎは？", correct: "なつ", options: ["なつ", "あき", "ふゆ", "あさ"] },
+  { text: "すずしい<br>「あき」の つぎは？", correct: "ふゆ", options: ["ふゆ", "なつ", "はる", "よる"] }
 ];
 
-// 【かんたん 3問目】助数詞（全30問）
 const baseQ3 = [
   { text: "えんぴつ ✏️ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "さつ"] },
   { text: "かみ 📄 は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "さつ", "こ"] },
-  { text: "本 📖 は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
+  { text: "ほん 📖 は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
   { text: "いぬ 🐶 は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "だい"] },
   { text: "ぞう 🐘 は<br>どうやって かぞえる？", correct: "とう", options: ["とう", "ひき", "わ", "こ"] },
-  { text: "とり 🐦 は<br>どうやって かぞえる？", correct: "わ", options: ["わ", "ひき", "とう", "まい"] },
-  { text: "くるま 🚗 は<br>どうやって かぞえる？", correct: "だい", options: ["だい", "こ", "ほん", "けん"] },
-  { text: "りんご 🍎 は<br>どうやって かぞえる？", correct: "こ", options: ["こ", "まい", "ほん", "さつ"] },
-  { text: "くつ 👟 は<br>どうやって かぞえる？", correct: "足", options: ["足", "まい", "こ", "ほん"] },
-  { text: "はさみ ✂️ は<br>どうやって かぞえる？", correct: "ちょう", options: ["ちょう", "ほん", "こ", "まい"] },
+  { text: "くるま 🚗 は<br>どうやって かぞえる？", correct: "だい", options: ["だい", "ほん", "こ", "まい"] },
+  { text: "とり 🐦 は<br>どうやって かぞえる？", correct: "わ", options: ["わ", "ひき", "こ", "とう"] },
+  { text: "シャツ 👕 は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "ちゃく", "こ"] },
+  { text: "くつ 👟 は<br>どうやって かぞえる？", correct: "そく", options: ["そく", "こ", "ほん", "まい"] },
+  { text: "ケーキ 🍰 は<br>どうやって かぞえる？", correct: "こ", options: ["こ", "ほん", "まい", "さつ"] },
+  { text: "りんご 🍎 は<br>どうやって かぞえる？", correct: "こ", options: ["こ", "ほん", "まい", "さつ"] },
+  { text: "さかな 🐟 は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "こ"] },
+  { text: "かさ ☂️ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "まい", "こ", "さつ"] },
+  { text: "いす 🪑 は<br>どうやって かぞえる？", correct: "きゃく", options: ["きゃく", "こ", "だい", "ほん"] },
+  { text: "ひこうき ✈️ は<br>どうやって かぞえる？", correct: "き", options: ["き", "だい", "こ", "ほん"] },
   { text: "おさら 🍽️ は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "こ", "ほん", "さつ"] },
-  { text: "いえ 🏠 は<br>どうやって かぞえる？", correct: "けん", options: ["けん", "だい", "こ", "さつ"] },
-  { text: "さかな 🐟 は<br>どうやって かぞえる？", correct: "匹", options: ["匹", "まい", "とう", "こ"] },
-  { text: "うさぎ 🐰 は<br>どうやって かぞえる？", correct: "羽", options: ["羽", "匹", "頭", "こ"] },
-  { text: "お茶 🍵 は<br>どうやって かぞえる？", correct: "はい", options: ["はい", "ほん", "こ", "まい"] },
-  { text: "ケーキ 🍰 は<br>どうやって かぞえる？", correct: "きれ", options: ["きれ", "こ", "まい", "ほん"] },
-  { text: "はな 🌸 は<br>どうやって かぞえる？", correct: "りん", options: ["りん", "ほん", "まい", "こ"] },
-  { text: "箸 🥢 は<br>どうやって かぞえる？", correct: "ぜん", options: ["ぜん", "ほん", "くみ", "まい"] },
-  { text: "パンツ 🩳 は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "こ", "さつ"] },
-  { text: "傘 ☂️ は<br>どうやって かぞえる？", correct: "本", options: ["本", "まい", "こ", "さつ"] },
-  { text: "ねこ 🐱 は<br>どうやって かぞえる？", correct: "匹", options: ["匹", "頭", "羽", "こ"] },
-  { text: "うま 🐎 は<br>どうやって かぞえる？", correct: "頭", options: ["頭", "匹", "羽", "だい"] },
-  { text: "飛行機 ✈️ は<br>どうやって かぞえる？", correct: "機", options: ["機", "だい", "こ", "ほん"] },
-  { text: "船 🚢 は<br>どうやって かぞえる？", correct: "隻", options: ["隻", "だい", "こ", "ほん"] },
-  { text: "シャツ 👔 は<br>どうやって かぞえる？", correct: "枚", options: ["枚", "本", "着", "こ"] },
-  { text: "スーツ 👔 は<br>どうやって かぞえる？", correct: "着", options: ["着", "枚", "本", "こ"] },
-  { text: "バイオリン 🎻 は<br>どうやって かぞえる？", correct: "挺", options: ["挺", "だい", "ほん", "こ"] },
-  { text: "たいこ 🥁 は<br>どうやって かぞえる？", correct: "面", options: ["面", "こ", "だい", "ほん"] },
-  { text: "ニュース 📰 は<br>どうやって かぞえる？", correct: "件", options: ["件", "こ", "まい", "ほん"] },
-  { text: "おにぎり 🍙 は<br>どうやって かぞえる？", correct: "個", options: ["個", "まい", "ほん", "さつ"] }
+  { text: "おはし 🥢 は<br>どうやって かぞえる？", correct: "ぜん", options: ["ぜん", "ほん", "こ", "まい"] },
+  { text: "おうち 🏠 は<br>どうやって かぞえる？", correct: "けん", options: ["けん", "こ", "だい", "ほん"] },
+  { text: "ジュース 🧃 は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "だい"] },
+  { text: "おはな 🌷 は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "ひき"] }
 ];
 
-// 【かんたん 4問目】反対語（全30問）
 const baseQ4 = [
   { text: "「おおきい」の<br>はんたいは？", type: "opp", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
   { text: "「あつい」の<br>はんたいは？", type: "opp", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
   { text: "「たかい」の<br>はんたいは？", type: "opp", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
   { text: "「はやい」の<br>はんたいは？", type: "opp", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
   { text: "「あかるい」の<br>はんたいは？", type: "opp", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] },
-  { text: "「ながい」の<br>はんたいは？", type: "opp", correct: "みじかい", options: ["みじかい", "ひくい", "ちいさい", "おそい"] },
-  { text: "「おもい」の<br>はんたいは？", type: "opp", correct: "かるい", options: ["かるい", "くらい", "おそい", "ちいさい"] },
-  { text: "「つよい」の<br>はんたいは？", type: "opp", correct: "よわい", options: ["よわい", "ひくい", "おそい", "かるい"] },
-  { text: "「かたい」の<br>はんたいは？", type: "opp", correct: "やわらかい", options: ["やわらかい", "つめたい", "かるい", "みじかい"] },
-  { text: "「ひろい」の<br>はんたいは？", type: "opp", correct: "せまい", options: ["せまい", "くらい", "ひくい", "みじかい"] },
-  { text: "「あたらし」の<br>はんたいは？", type: "opp", correct: "ふるい", options: ["ふるい", "おそい", "くらい", "つめたい"] },
-  { text: "「とおい」の<br>はんたいは？", type: "opp", correct: "ちかい", options: ["ちかい", "ひくい", "みじかい", "かるい"] },
-  { text: "「ふかい」の<br>はんたいは？", type: "opp", correct: "あさい", options: ["あさい", "ひくい", "せまい", "かるい"] },
-  { text: "「ふとい」の<br>はんたいは？", type: "opp", correct: "ほそい", options: ["ほそい", "みじかい", "ちいさい", "かるい"] },
-  { text: "「あたたかい」の<br>はんたいは？", type: "opp", correct: "すずしい", options: ["すずしい", "つめたい", "くらい", "ひくい"] },
-  { text: "「おおい」の<br>はんたいは？", type: "opp", correct: "すくない", options: ["すくない", "ちいさい", "かるい", "ひくい"] },
-  { text: "「あがる」の<br>はんたいは？", type: "opp", correct: "さがる", options: ["さがる", "おりる", "とまる", "はしる"] },
-  { text: "「はいる」の<br>はんたいは？", type: "opp", correct: "でる", options: ["でる", "あく", "のる", "たつ"] },
-  { text: "「のる」の<br>はんたいは？", type: "opp", correct: "おりる", options: ["おりる", "でる", "さがる", "あるく"] },
-  { text: "「あける」の<br>はんたいは？", type: "opp", correct: "しめる", options: ["しめる", "とじる", "けす", "とめる"] },
-  { text: "「つける」の<br>はんたいは？", type: "opp", correct: "けす", options: ["けす", "とめる", "しめる", "きる"] },
-  { text: "「わらう」の<br>はんたいは？", type: "opp", correct: "なく", options: ["なく", "おこる", "ねる", "うたう"] },
-  { text: "「おきる」の<br>はんたいは？", type: "opp", correct: "ねる", options: ["ねる", "すわる", "たてる", "やすむ"] },
-  { text: "「たつ」の<br>はんたいは？", type: "opp", correct: "すわる", options: ["すわる", "ねる", "ふせぐる", "おりる"] },
-  { text: "「かつ」の<br>はんたいは？", type: "opp", correct: "まける", options: ["まける", "にげる", "おちる", "とまる"] },
-  { text: "「はじまり」の<br>はんたいは？", type: "opp", correct: "おわり", options: ["おわり", "あと", "うしろ", "ゴール"] },
-  { text: "「まえ」の<br>はんたいは？", type: "opp", correct: "うしろ", options: ["うしろ", "した", "おく", "そと"] },
-  { text: "「みぎ」の<br>はんたいは？", type: "opp", correct: "ひだり", options: ["ひだり", "した", "うしろ", "なか"] },
-  { text: "「うえ」の<br>はんたいは？", type: "opp", correct: "した", options: ["した", "なか", "うしろ", "ひだり"] },
-  { text: "「おもて」の<br>はんたいは？", type: "opp", correct: "うら", options: ["うら", "した", "おく", "そと"] }
+  { text: "「ながい」の<br>はんたいは？", type: "opp", correct: "みじかい", options: ["みじかい", "かるい", "ひろい", "ちいさい"] },
+  { text: "「おもい」の<br>はんたいは？", type: "opp", correct: "かるい", options: ["かるい", "やわらかい", "ちいさい", "おそい"] },
+  { text: "「かたい」の<br>はんたいは？", type: "opp", correct: "やわらかい", options: ["やわらかい", "かるい", "ひくい", "ちいさい"] },
+  { text: "「ひろい」の<br>はんたいは？", type: "opp", correct: "せまい", options: ["せまい", "くらい", "ひくい", "おそい"] },
+  { text: "「とおい」の<br>はんたいは？", type: "opp", correct: "ちかい", options: ["ちかい", "せまい", "ひくい", "かるい"] },
+  { text: "「あたらしい」の<br>はんたいは？", type: "opp", correct: "ふるい", options: ["ふるい", "くらい", "おそい", "ちいさい"] },
+  { text: "「うえ」の<br>はんたいは？", type: "opp", correct: "した", options: ["した", "みぎ", "まえ", "なか"] },
+  { text: "「みぎ」の<br>はんたいは？", type: "opp", correct: "ひだり", options: ["ひだり", "した", "うしろ", "そと"] },
+  { text: "「まえ」の<br>はんたいは？", type: "opp", correct: "うしろ", options: ["うしろ", "した", "ひだり", "そと"] },
+  { text: "「なか」の<br>はんたいは？", type: "opp", correct: "そと", options: ["そと", "した", "ひだり", "うしろ"] },
+  { text: "「あける」の<br>はんたいは？", type: "opp", correct: "しめる", options: ["しめる", "くだる", "くる", "なく"] },
+  { text: "「のぼる」の<br>はんたいは？", type: "opp", correct: "くだる", options: ["くだる", "しめる", "くる", "ねる"] },
+  { text: "「いく」の<br>はんたいは？", type: "opp", correct: "くる", options: ["くる", "くだる", "なく", "でる"] },
+  { text: "「わらう」の<br>はんたいは？", type: "opp", correct: "なく", options: ["なく", "くる", "おきる", "でる"] },
+  { text: "「ねる」の<br>はんたいは？", type: "opp", correct: "おきる", options: ["おきる", "なく", "くる", "しめる"] },
+  { text: "「はいる」の<br>はんたいは？", type: "opp", correct: "でる", options: ["でる", "くる", "おきる", "くだる"] },
+  { text: "「あさ」の<br>はんたいは？", type: "opp", correct: "よる", options: ["よる", "ひる", "ゆうがた", "あした"] },
+  { text: "「すき」の<br>はんたいは？", type: "opp", correct: "きらい", options: ["きらい", "こわい", "いたい", "わるい"] },
+  { text: "「かつ」の<br>はんたいは？", type: "opp", correct: "まける", options: ["まける", "なく", "でる", "くる"] },
+  { text: "「いい」の<br>はんたいは？", type: "opp", correct: "わるい", options: ["わるい", "こわい", "いたい", "きらい"] }
 ];
 
-// 【チャレンジ 1問目】漢字の読み（全30問）
 const appliedQ1 = [
   { text: "「山」は<br>なんて よむ？", correct: "やま", options: ["やま", "かわ", "うみ", "そら"] },
   { text: "「川」は<br>なんて よむ？", correct: "かわ", options: ["かわ", "やま", "いけ", "みず"] },
@@ -349,140 +285,47 @@ const appliedQ1 = [
   { text: "「火」は<br>なんて よむ？", correct: "ひ", options: ["ひ", "みず", "き", "つち"] },
   { text: "「土」は<br>なんて よむ？", correct: "つち", options: ["つち", "いし", "すな", "みず"] },
   { text: "「犬」は<br>なんて よむ？", correct: "いぬ", options: ["いぬ", "ねこ", "とり", "うま"] },
-  { text: "「上」は<br>なんて よむ？", correct: "うえ", options: ["うえ", "した", "なか", "そと"] },
-  { text: "「下」は<br>なんて よむ？", correct: "した", options: ["した", "うえ", "なか", "まえ"] },
-  { text: "「左」は<br>なんて よむ？", correct: "ひだり", options: ["ひだり", "みぎ", "まえ", "うしろ"] },
-  { text: "「右」は<br>なんて よむ？", correct: "みぎ", options: ["みぎ", "ひだり", "うえ", "した"] },
-  { text: "「口」は<br>なんて よむ？", correct: "くち", options: ["くち", "め", "みみ", "て"] },
-  { text: "「目」は<br>なんて よむ？", correct: "め", options: ["め", "くち", "みみ", "はな"] },
-  { text: "「耳」は<br>なんて よむ？", correct: "みみ", options: ["みみ", "め", "くち", "て"] },
-  { text: "「手」は<br>なんて よむ？", correct: "て", options: ["て", "あし", "め", "くち"] },
-  { text: "「足」は<br>なんて よむ？", correct: "あし", options: ["あし", "て", "め", "みみ"] },
-  { text: "「空」は<br>なんて よむ？", correct: "そら", options: ["そら", "うみ", "やま", "くも"] },
-  { text: "「雨」は<br>なんて よむ？", correct: "あめ", options: ["あめ", "ゆき", "かぜ", "くも"] },
-  { text: "「花」は<br>なんて よむ？", correct: "はな", options: ["はな", "くさ", "き", "えだ"] },
-  { text: "「草」は<br>なんて よむ？", correct: "くさ", options: ["くさ", "はな", "き", "もり"] },
-  { text: "「竹」は<br>なんて よむ？", correct: "たけ", options: ["たけ", "き", "くさ", "まつ"] },
-  { text: "「石」は<br>なんて よむ？", correct: "いし", options: ["いし", "つち", "すな", "いわ"] },
-  { text: "「赤」は<br>なんて よむ？", correct: "あか", options: ["あか", "あお", "しろ", "くろ"] },
-  { text: "「青」は<br>なんて よむ？", correct: "あお", options: ["あお", "あか", "きいろ", "しろ"] },
-  { text: "「白」は<br>なんて よむ？", correct: "しろ", options: ["しろ", "くろ", "あか", "あお"] },
-  { text: "「黒」は<br>なんて よむ？", correct: "くろ", options: ["くろ", "しろ", "あか", "あお"] },
-  { text: "「音」は<br>なんて よむ？", correct: "おと", options: ["おと", "声", "歌", "風"] },
-  { text: "「車」は<br>なんて よむ？", correct: "くるま", options: ["くるま", "でんしゃ", "バス", "ふね"] }
+  { text: "「上」は<br>なんて よむ？", correct: "うえ", options: ["うえ", "した", "なか", "そと"] }
 ];
 
-// 【チャレンジ 2問目】オノマトペ・形容辞（全30問）
 const appliedQ2 = [
   { text: "あめが ( ___ )<br>ふっている", correct: "ざーざー", options: ["ざーざー", "ぱくぱく", "すやすや", "にこにこ"] },
-  { text: "赤ちゃんが ( ___ )<br>ねている", correct: "すやすや", options: ["すやすや", "ざーざー", "ごろごろ", "ばたばた"] },
+  { text: "あかちゃんが ( ___ )<br>ねている", correct: "すやすや", options: ["すやすや", "ざーざー", "ごろごろ", "ばたばた"] },
   { text: "ごはんを ( ___ )<br>たべる", correct: "もりもり", options: ["もりもり", "すらすら", "さらさら", "ころころ"] },
   { text: "かぜが ( ___ )<br>ふいている", correct: "ひゅーひゅー", options: ["ひゅーひゅー", "ぱくぱく", "にこにこ", "ぐうぐう"] },
   { text: "いぬが ( ___ )<br>ほえている", correct: "わんわん", options: ["わんわん", "にゃーにゃー", "もーもー", "けろけろ"] },
-  { text: "ねこが ( ___ )<br>ないている", correct: "にゃーにゃー", options: ["にゃーにゃー", "わんわん", "ぴよぴよ", "かーかー"] },
-  { text: "カエルが ( ___ )<br>ないている", correct: "けろけろ", options: ["けろけろ", "わんわん", "にゃーにゃー", "ぶーぶー"] },
-  { text: "ひよこが ( ___ )<br>ないている", correct: "ぴよぴよ", options: ["ぴよぴよ", "かーかー", "わんわん", "もーもー"] },
-  { text: "おなかが ( ___ )<br>なった", correct: "ぺこぺこ", options: ["ぺこぺこ", "からから", "すかすか", "ぴかぴか"] },
-  { text: "のどが ( ___ )<br>かわいた", correct: "からから", options: ["からから", "ぺこぺこ", "すやすや", "もりもり"] },
-  { text: "くつが ( ___ )<br>みがけた", correct: "ぴかぴか", options: ["ぴかぴか", "つるつる", "ふわふわ", "さらさら"] },
-  { text: "パンが ( ___ )<br>している", correct: "ふわふわ", options: ["ふわふわ", "かちかち", "ツルツル", "ねばねば"] },
-  { text: "こおりが ( ___ )<br>している", correct: "つるつる", options: ["つるつる", "ふわふわ", "ざらざら", "ねばねば"] },
-  { text: "すなが ( ___ )<br>している", correct: "ざらざら", options: ["ざらざら", "つるつる", "ふわふわ", "もちもち"] },
-  { text: "おもちが ( ___ )<br>している", correct: "もちもち", options: ["もちもち", "かちかち", "さらさら", "ざらざら"] },
-  { text: "かみさまが ( ___ )<br>わらう", correct: "にこにこ", options: ["にこにこ", "げらげら", "くすくす", "ぷんぷん"] },
-  { text: "おこって ( ___ )<br>する", correct: "ぷんぷん", options: ["ぷんぷん", "にこにこ", "わくわく", "しょんぼり"] },
-  { text: "あしたの えんそく ( ___ )<br>するね", correct: "わくわく", options: ["わくわく", "しょんぼり", "いらいら", "そわそわ"] },
-  { text: "しっぱいして ( ___ )<br>する", correct: "しょんぼり", options: ["しょんぼり", "わくわく", "にこにこ", "もりもり"] },
-  { text: "ほしが ( ___ )<br>ひかる", correct: "きらきら", options: ["きらきら", "ぎらぎら", "ぴかぴか", "りんりん"] },
-  { text: "たいようが ( ___ )<br>てりつける", correct: "ぎらぎら", options: ["ぎらぎら", "きらきら", "すやすや", "ふわふわ"] },
-  { text: "すずが ( ___ )<br>なる", correct: "りんりん", options: ["りんりん", "ごろごろ", "ざーざー", "かんかん"] },
-  { text: "かみなりが ( ___ )<br>なる", correct: "ごろごろ", options: ["ごろごろ", "りんりん", "しくしく", "ぱちぱち"] },
-  { text: "たきびが ( ___ )<br>もえる", correct: "ぱちぱち", options: ["ぱちぱち", "ざーざー", "すらすら", "ぐるぐる"] },
-  { text: "みずが ( ___ )<br>ながれる", correct: "さらさら", options: ["さらさら", "ねばねば", "もちもち", "ごろごろ"] },
-  { text: "なっとうが ( ___ )<br>する", correct: "ねばねば", options: ["ねばねば", "さらさら", "つるつる", "ふわふわ"] },
-  { text: "めが ( ___ )<br>まわる", correct: "ぐるぐる", options: ["ぐるぐる", "うとうと", "すかすか", "しくしく"] },
-  { text: "じゅぎょうちゅう ( ___ )<br>する", correct: "うとうと", options: ["うとうと", "わくわく", "もりもり", "にこにこ"] },
-  { text: "なみだが ( ___ )<br>でる", correct: "ぽろぽろ", options: ["ぽろぽろ", "もりもり", "にこにこ", "ざーざー"] },
-  { text: "しくしく ( ___ )", correct: "なく", options: ["なく", "わらう", "ねる", "たべる"] }
+  { text: "ねこが ( ___ )<br>ないている", correct: "にゃーにゃー", options: ["にゃーにゃー", "わんわん", "もーもー", "ぴよぴよ"] },
+  { text: "かえるが ( ___ )<br>ないている", correct: "けろけろ", options: ["けろけろ", "わんわん", "にゃーにゃー", "もーもー"] },
+  { text: "ひよこが ( ___ )<br>ないている", correct: "ぴよぴよ", options: ["ぴよぴよ", "わんわん", "にゃーにゃー", "けろけろ"] },
+  { text: "ほしが ( ___ )<br>ひかる", correct: "きらきら", options: ["きらきら", "ざーざー", "ごろごろ", "ばたばた"] },
+  { text: "みずが ( ___ )<br>ながれる", correct: "さらさら", options: ["さらさら", "もりもり", "ばたばた", "ころころ"] }
 ];
 
-// 【チャレンジ 3問目】仲間分け・カタカナ（全30問）
 const appliedQ3 = [
   { text: "カタカナで かくのは<br>どちらかな？", correct: "バナナ 🍌", options: ["バナナ 🍌", "りんご 🍎", "みかん 🍊", "ぶどう 🍇"] },
   { text: "カタカナで かくのは<br>どちらかな？", correct: "バス 🚌", options: ["バス 🚌", "くるま 🚗", "でんしゃ 🚃", "ふね 🚢"] },
   { text: "カタカナで かくのは<br>どちらかな？", correct: "ライオン 🦁", options: ["ライオン 🦁", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
+  { text: "カタカナで かくのは<br>どちらかな？", correct: "テレビ 📺", options: ["テレビ 📺", "ほん 📖", "つくえ 🪑", "くつ 👟"] },
+  { text: "カタカナで かくのは<br>どちらかな？", correct: "コップ 🥤", options: ["コップ 🥤", "おさら 🍽️", "おはし 🥢", "かさ ☂️"] },
   { text: "なかまはずれは<br>どれかな？", correct: "くるま 🚗", options: ["くるま 🚗", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
   { text: "なかまはずれは<br>どれかな？", correct: "りんご 🍎", options: ["りんご 🍎", "バス 🚌", "でんしゃ 🚃", "ひこうき ✈️"] },
-  { text: "カタカナで かくのは<br>どれかな？", correct: "カメラ 📷", options: ["カメラ 📷", "つくえ 🪵", "えんぴつ ✏️", "ほん 📖"] },
-  { text: "カタカナで かくのは<br>どれかな？", correct: "テレビ 📺", options: ["テレビ 📺", "かさ ☂️", "くつ 👟", "ふく 👔"] },
-  { text: "カタカナで かくのは<br>どれかな？", correct: "ジュース 🧃", options: ["ジュース 🧃", "おみず 💧", "おちゃ 🍵", "スープ 🥣"] },
-  { text: "カタカナで かくのは<br>どれかな？", correct: "パン 🍞", options: ["パン 🍞", "ごはん 🍚", "めん 🍜", "もち 🍡"] },
-  { text: "カタカナで かくのは<br>どれかな？", correct: "チョコ 🍫", options: ["チョコ 🍫", "せんべい 🍘", "まんじゅう 🍡", "あめ 🍬"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "キャベツ 🥬", options: ["キャベツ 🥬", "バナナ 🍌", "りんご 🍎", "ぶどう 🍇"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "さんすう 🔢", options: ["さんすう 🔢", "チューリップ 🌷", "ヒマワリ 🌻", "バラ 🌹"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "さかな 🐟", options: ["さかな 🐟", "すずめ 🐦", "からす 🐦‍⬛", "つばめ 燕"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "ピアノ 🎹", options: ["ピアノ 🎹", "やきゅう ⚾", "サッカー ⚽", "バスケ 🏀"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "ノート 📓", options: ["ノート 📓", "オムライス 🍳", "ラーメン 🍜", "カレー 🍛"] },
-  { text: "のりものは<br>どれかな？", correct: "タクシー 🚕", options: ["タクシー 🚕", "ライオン 🦁", "トマト 🍅", "ノート 📓"] },
-  { text: "たべものは<br>どれかな？", correct: "ハンバーグ 🍔", options: ["ハンバーグ 🍔", "クツ 👟", "イヌ 🐶", "スプーン 🥄"] },
-  { text: "どうぶつは<br>どれかな？", correct: "ゾウ 🐘", options: ["ゾウ 🐘", "リンゴ 🍎", "ボタン 🔘", "コップ 🥛"] },
-  { text: "がっこうで つかうのは<br>どれかな？", correct: "消しゴム 🧹", options: ["消しゴム 🧹", "フライパン 🍳", "テレビ 📺", "ベッド 🛏️"] },
-  { text: "あかい くだものは<br>どれかな？", correct: "イチゴ 🍓", options: ["イチゴ 🍓", "バナナ 🍌", "メロン 🍈", "ぶどう 🍇"] },
-  { text: "あおいろの ものは<br>どれかな？", correct: "うみ 🌊", options: ["うみ 🌊", "たいよう ☀️", "き 🌳", "たんぽぽ 🌼"] },
-  { text: "きいろい ものは<br>どれかな？", correct: "ひまわり 🌻", options: ["ひまわり 🌻", "トマト 🍅", "そら ☁️", "ポスト 📮"] },
-  { text: "みどりいろの ものは<br>どれかな？", correct: "はっぱ 🍃", options: ["はっぱ 🍃", "いちご 🍓", "ゆき ❄️", "つち 🟫"] },
-  { text: "くろい ものは<br>どれかな？", correct: "からす 🐦‍⬛", options: ["からす 🐦‍⬛", "うさぎ 🐰", "ひよこ 🐥", "くも ☁️"] },
-  { text: "しろい ものは<br>どれかな？", correct: "ゆき ❄️", options: ["ゆき ❄️", "ポスト 📮", "バナナ 🍌", "かわ 🌊"] },
-  { text: "とぶ どうぶつは<br>どれかな？", correct: "ハト 🕊️", options: ["ハト 🕊️", "ライオン 🦁", "キリン 🦒", "カメ 🐢"] },
-  { text: "うみで およぐのは<br>どれかな？", correct: "クジラ 🐳", options: ["クジラ 🐳", "キツネ 🦊", "リス 🐿️", "ウマ 🐎"] },
-  { text: "冬に みるものは<br>どれかな？", correct: "ゆきだるま ☃️", options: ["ゆきだるま ☃️", "ひまわり 🌻", "プール 🏊", "かぶとむし 🪲"] },
-  { text: "夏に みるものは<br>どれかな？", correct: "かきごおり 🍧", options: ["かきごおり 🍧", "ゆき ❄️", "こたつ 🪑", "ほっかむり 🧣"] },
-  { text: "春に さく はなは<br>どれかな？", correct: "サクラ 🌸", options: ["サクラ 🌸", "モミジ 🍁", "ポインセチア 🪴", "アサガオ 🌺"] }
+  { text: "なかまはずれは<br>どれかな？", correct: "さかな 🐟", options: ["さかな 🐟", "チューリップ 🌷", "ひまわり 🌻", "バラ 🌹"] },
+  { text: "なかまはずれは<br>どれかな？", correct: "ほん 📖", options: ["ほん 📖", "バナナ 🍌", "いちご 🍓", "ぶどう 🍇"] },
+  { text: "なかまはずれは<br>どれかな？", correct: "あか 🔴", options: ["あか 🔴", "つくえ 🪑", "いす 🪑", "ベッド 🛏️"] }
 ];
 
-// 【チャレンジ 4問目】ことわざ（全30問）
 const appliedQ4 = [
   { text: "( ___ ) も<br>きから おちる", correct: "さる", options: ["さる", "いぬ", "ねこ", "うさぎ"] },
   { text: "はやおきは ( ___ )<br>の とく", correct: "さんもん", options: ["さんもん", "ひゃくえん", "いちもん", "じゅうえん"] },
   { text: "いぬも あるけば ( ___ )<br>に あたる", correct: "ぼう", options: ["ぼう", "いし", "かべ", "き"] },
   { text: "ちりも つもれば ( ___ )<br>と なる", correct: "やま", options: ["やま", "かわ", "うみ", "いし"] },
   { text: "ねこに ( ___ )", correct: "こばん", options: ["こばん", "おかし", "おもちゃ", "みず"] },
-  { text: "ぶたに ( ___ )", correct: "真珠", options: ["真珠", "おかし", "はな", "ごはん"] },
-  { text: "馬の耳に ( ___ )", correct: "念仏", options: ["念仏", "おんがく", "うた", "こえ"] },
-  { text: "かえるの つらに ( ___ )", correct: "みず", options: ["みず", "つち", "あめ", "風"] },
-  { text: "かっぱの ( ___ )", correct: "川流れ", options: ["川流れ", "およぎ", "ジャンプ", "いたずら"] },
-  { text: "どんぐりの ( ___ ) くらべ", correct: "せ", options: ["せ", "かお", "おもさ", "あたま"] },
-  { text: "ななころび ( ___ ) おき", correct: "やおき", options: ["やおき", "ろくおき", "ごおき", "じゅうおき"] },
-  { text: "さんニン よれば ( ___ ) の ちえ", correct: "もんじゅ", options: ["もんじゅ", "はかせ", "せんせい", "てんさい"] },
-  { text: "石の上にも ( ___ ) 年", correct: "さん", options: ["さん", "いち", "ご", "じゅう"] },
-  { text: "花より ( ___ )", correct: "だんご", options: ["だんご", "おかし", "パン", "りんご"] },
-  { text: "えびで ( ___ ) を つる", correct: "たい", options: ["たい", "マグロ", "サメ", "クジラ"] },
-  { text: "あおてんじょうに ( ___ )", correct: "ほし", options: ["ほし", "くも", "つき", "あめ"] },
-  { text: "わらう かどには ( ___ ) きたる", correct: "ふく", options: ["ふく", "かね", "ひと", "かみ"] },
-  { text: "鬼に ( ___ )", correct: "金棒", options: ["金棒", "刀", "やり", "ハサミ"] },
-  { text: "頭かくして ( ___ ) かくさず", correct: "尻", options: ["尻", "足", "手", "耳"] },
-  { text: "ちりも つもれば ( ___ )", correct: "山となる", options: ["山となる", "川となる", "海となる", "空となる"] },
-  { text: "すめば ( ___ )", correct: "みやこ", options: ["みやこ", "たのしい", "いえ", "ふるさと"] },
-  { text: "あける ( ___ ) には 福きたる", correct: "あさ", options: ["あさ", "よる", "ひる", "とし"] },
-  { text: "勝って ( ___ ) の 緒を しめよ", correct: "兜", options: ["兜", "くつ", "ふく", "ベルト"] },
-  { text: "一寸の 虫にも ( ___ ) の たましい", correct: "五分", options: ["五分", "一分", "十分", "半分"] },
-  { text: "情けは ( ___ ) の ためならず", correct: "人の", options: ["人の", "じぶんの", "ともだちの", "かぞくの"] },
-  { text: "早起きは ( ___ ) の 徳", correct: "三文", options: ["三文", "百円", "一万円", "千円"] },
-  { text: "好きこそ ( ___ ) の 上手なれ", correct: "もの", options: ["もの", "うた", "べんきょう", "スポーツ"] },
-  { text: "立つ 鳥 ( ___ ) を にごさず", correct: "あと", options: ["あと", "みず", "そら", "す"] },
-  { text: "ちりも 積もれば ( ___ ) となる", correct: "やま", options: ["やま", "いわ", "かわ", "うみ"] },
-  { text: "継続は ( ___ ) なり", correct: "力", options: ["力", "たから", "かち", "みち"] }
+  { text: "かえるの こは ( ___ )", correct: "かえる", options: ["かえる", "おたまじゃくし", "さかな", "とり"] },
+  { text: "みっか ( ___ )", correct: "ぼうず", options: ["ぼうず", "おじさん", "こども", "せんせい"] },
+  { text: "いしの うえにも ( ___ ) ねん", correct: "さん", options: ["さん", "いち", "じゅう", "ひゃく"] },
+  { text: "わらう かどには ( ___ ) きたる", correct: "ふく", options: ["ふく", "かね", "かみ", "ひと"] },
+  { text: "はなより ( ___ )", correct: "だんご", options: ["だんご", "おかし", "ジュース", "みかん"] }
 ];
-
-/* 出題プール＆シャッフル（重複防止） */
-let questionPools = {};
-
-function getNextQuestionFromPool(key, dataList) {
-  if (!questionPools[key] || questionPools[key].length === 0) {
-    questionPools[key] = [...dataList].sort(() => 0.5 - Math.random());
-  }
-  return questionPools[key].pop();
-}
 
 function getPokemonImageUrl(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`; }
 
@@ -498,6 +341,34 @@ const foodListEl = document.getElementById('food-list'), expText = document.getE
 const partnerImg = document.getElementById('partner-image'), partnerName = document.getElementById('partner-name');
 const resetGameBtn = document.getElementById('reset-game-btn');
 const partnerStage = document.getElementById('partner-stage');
+
+function playDoubleJumpSound(callback) {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) { if(callback) callback(); return; }
+    const ctx = new AudioCtx();
+    
+    function playSingle(time) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(180, time);
+      osc.frequency.exponentialRampToValueAtTime(600, time + 0.12);
+      gain.gain.setValueAtTime(0.3, time);
+      gain.gain.linearRampToValueAtTime(0.01, time + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(time);
+      osc.stop(time + 0.12);
+    }
+    
+    const now = ctx.currentTime;
+    playSingle(now);
+    playSingle(now + 0.2);
+    
+    setTimeout(() => { if(callback) callback(); }, 450);
+  } catch(e) { if(callback) callback(); }
+}
 
 function initBaseMode() {
   baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
@@ -523,19 +394,11 @@ function updateStageBackground() {
   partnerStage.classList.remove('bg-lovely', 'bg-sea', 'bg-cool');
   
   if (!isAppliedMode) {
-    if (baseState.isEvolved) {
-      partnerStage.classList.add('bg-cool');
-    } else {
-      partnerStage.classList.add('bg-lovely');
-    }
+    partnerStage.classList.add(baseState.isEvolved ? 'bg-cool' : 'bg-lovely');
   } else {
-    if (appliedState.stage === 0) {
-      partnerStage.classList.add('bg-lovely');
-    } else if (appliedState.stage === 1) {
-      partnerStage.classList.add('bg-sea');
-    } else {
-      partnerStage.classList.add('bg-cool');
-    }
+    if (appliedState.stage === 0) partnerStage.classList.add('bg-lovely');
+    else if (appliedState.stage === 1) partnerStage.classList.add('bg-sea');
+    else partnerStage.classList.add('bg-cool');
   }
 }
 
@@ -550,11 +413,8 @@ function renderRoom() {
   const currentState = isAppliedMode ? appliedState : baseState;
   expText.innerText = currentState.exp; expBar.style.width = currentState.exp + "%";
   
-  if ((!isAppliedMode && baseState.isEvolved) || (isAppliedMode && appliedState.stage === 2)) {
-    resetGameBtn.style.display = 'inline-flex';
-  } else {
-    resetGameBtn.style.display = 'none';
-  }
+  if ((!isAppliedMode && baseState.isEvolved) || (isAppliedMode && appliedState.stage === 2)) resetGameBtn.style.display = 'inline-flex';
+  else resetGameBtn.style.display = 'none';
   
   currentState.foods.forEach((food, index) => {
     const isUnlocked = currentState.keys > index;
@@ -563,9 +423,7 @@ function renderRoom() {
     else if (!isUnlocked) { foodEl.className = 'food-item locked'; foodEl.innerText = food.emoji; }
     else { 
       foodEl.className = 'food-item'; foodEl.innerText = food.emoji; 
-      if ((!isAppliedMode && !baseState.isEvolved) || (isAppliedMode && appliedState.stage < 2)) {
-        foodEl.onclick = () => feedPartner(index, foodEl); 
-      }
+      if ((!isAppliedMode && !baseState.isEvolved) || (isAppliedMode && appliedState.stage < 2)) foodEl.onclick = () => feedPartner(index, foodEl); 
     }
     foodListEl.appendChild(foodEl);
   });
@@ -697,20 +555,20 @@ function showNextQuestion() {
   const contentEl = document.getElementById('quiz-content'); contentEl.innerHTML = "";
   
   if (!isAppliedMode) {
-    if (currentQIndex === 0) renderQuestionCard(contentEl, baseQ1, "あてはまる ことばを<br>えらぼう！", "baseQ1");
-    else if (currentQIndex === 1) renderQuestionCard(contentEl, baseQ2, "なんて よむかな？", "baseQ2");
-    else if (currentQIndex === 2) renderQuestionCard(contentEl, baseQ3, "かぞえかたを<br>えらぼう！", "baseQ3");
-    else renderQuestionCard(contentEl, baseQ4, "はんたいの ことばを<br>えらぼう！", "baseQ4");
+    if (currentQIndex === 0) renderQuestionCard(contentEl, baseQ1, "あてはまる ことばを<br>えらぼう！");
+    else if (currentQIndex === 1) renderQuestionCard(contentEl, baseQ2, "なんて よむかな？");
+    else if (currentQIndex === 2) renderQuestionCard(contentEl, baseQ3, "かぞえかたを<br>えらぼう！");
+    else renderQuestionCard(contentEl, baseQ4, "はんたいの ことばを<br>えらぼう！");
   } else {
-    if (currentQIndex === 0) renderQuestionCard(contentEl, appliedQ1, "かんじを よんでみよう！", "appliedQ1");
-    else if (currentQIndex === 1) renderQuestionCard(contentEl, appliedQ2, "ぴったりな ことばを<br>えらぼう！", "appliedQ2");
-    else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "グループの なかまを<br>えらぼう！", "appliedQ3");
-    else renderQuestionCard(contentEl, appliedQ4, "ことわざを えらぼう！", "appliedQ4");
+    if (currentQIndex === 0) renderQuestionCard(contentEl, appliedQ1, "かんじを よんでみよう！");
+    else if (currentQIndex === 1) renderQuestionCard(contentEl, appliedQ2, "ぴったりな ことばを<br>えらぼう！");
+    else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "グループの なかまを<br>えらぼう！");
+    else renderQuestionCard(contentEl, appliedQ4, "ことわざを えらぼう！");
   }
 }
 
-function renderQuestionCard(container, dataList, titleText, poolKey) {
-  const q = getNextQuestionFromPool(poolKey, dataList);
+function renderQuestionCard(container, dataList, titleText) {
+  const q = dataList[Math.floor(Math.random() * dataList.length)];
   
   container.innerHTML = `
     <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
@@ -723,15 +581,26 @@ function renderQuestionCard(container, dataList, titleText, poolKey) {
 
   document.getElementById('q-voice-btn').onclick = () => {
     let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
-    cleanText = cleanText.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '');
+    cleanText = cleanText.replace(/[\u1F600-\u1F64F\u1F300-\u1F5FF\u1F680-\u1F6FF\u2600-\u26FF\u2700-\u27BF]/g, '');
 
-    if (q.type !== 'opp') {
-      cleanText = cleanText.replace(/「[^」]+」/g, 'これ');
+    if (q.type !== 'opp') { cleanText = cleanText.replace(/「[^」]+」/g, 'これ'); }
+
+    const hasBlank = cleanText.includes('( ___ )');
+
+    if (hasBlank) {
+      const parts = cleanText.split('( ___ )');
+      speakJapaneseVoice(parts[0].trim());
+      
+      setTimeout(() => {
+        playDoubleJumpSound(() => {
+          if (parts[1] && parts[1].trim()) {
+            setTimeout(() => { speakJapaneseVoice(parts[1].trim()); }, 300);
+          }
+        });
+      }, 500);
+    } else {
+      speakJapaneseVoice(cleanText);
     }
-
-    // 穴あき部分を自然な1秒間のタメ（読まずに間を空ける）で朗読
-    cleanText = cleanText.replace(/\( ___ \)/g, '、、、、');
-    speakJapaneseVoice(cleanText);
   };
 
   const optsGrid = document.getElementById('q-opts');
@@ -741,27 +610,21 @@ function renderQuestionCard(container, dataList, titleText, poolKey) {
     optsGrid.appendChild(btn);
   });
 
-  setTimeout(() => {
-    document.getElementById('q-voice-btn').click();
-  }, 300);
+  setTimeout(() => { document.getElementById('q-voice-btn').click(); }, 300);
 }
 
 function speakJapaneseVoice(text) {
   if (!text) return;
-  window.speechSynthesis.cancel();
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = 'ja-JP';
+  const msg = new SpeechSynthesisUtterance(text); msg.lang = 'ja-JP';
   if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
   const jaVoice = synthVoices.find(v => v.lang.startsWith('ja'));
   if (jaVoice) msg.voice = jaVoice;
-  msg.pitch = 1.1; msg.rate = 0.85;
+  msg.pitch = 1.1; msg.rate = 0.9;
   window.speechSynthesis.speak(msg);
 }
 
 function speakEnglishVoice(text) {
-  window.speechSynthesis.cancel();
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = 'en-US';
+  const msg = new SpeechSynthesisUtterance(text); msg.lang = 'en-US';
   if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
   const enVoice = synthVoices.find(v => v.lang.startsWith('en'));
   if (enVoice) msg.voice = enVoice;
@@ -778,34 +641,25 @@ function checkAnswer(isCorrect, answerText) {
     text.style.color = "var(--correct)";
     
     const voice = correctVoices[Math.floor(Math.random() * correctVoices.length)];
-    if (/[a-zA-Z]/.test(voice)) speakEnglishVoice(voice);
-    else speakJapaneseVoice(voice);
+    if (/[a-zA-Z]/.test(voice)) speakEnglishVoice(voice); else speakJapaneseVoice(voice);
   } else {
     icon.innerText = "❌"; icon.style.color = "var(--incorrect)";
     text.innerHTML = `${incorrectTexts[Math.floor(Math.random() * incorrectTexts.length)]}<br><span style="font-size:1.2rem; color:#666; display:block; margin-top:10px;">せいかいは：</span><span style="font-size:1.8rem; color:var(--primary-shadow); display:block;">${answerText}</span>`;
     text.style.color = "var(--incorrect)";
     
     const voice = incorrectVoices[Math.floor(Math.random() * incorrectVoices.length)];
-    if (/[a-zA-Z]/.test(voice)) speakEnglishVoice(voice);
-    else speakJapaneseVoice(voice);
+    if (/[a-zA-Z]/.test(voice)) speakEnglishVoice(voice); else speakJapaneseVoice(voice);
   }
   
   overlay.classList.add('show');
   
   setTimeout(() => {
     overlay.classList.remove('show');
-    if (isCorrect) {
-      currentQIndex++;
-      showNextQuestion();
-    }
+    if (isCorrect) { currentQIndex++; showNextQuestion(); }
   }, 1800); 
 }
 
-window.onload = () => { 
-  initBaseMode(); 
-  initAppliedMode(); 
-  renderRoom(); 
-};
+window.onload = () => { initBaseMode(); initAppliedMode(); renderRoom(); };
 </script>
 </body>
 </html>
