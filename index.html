@@ -58,7 +58,7 @@
     .food-item.locked { background: #E0E0E0; border-color: #F5F5F5; box-shadow: 0 6px 0 #BDBDBD; filter: grayscale(100%); pointer-events: none; }
     .food-item.locked::after { content: '🔒'; position: absolute; font-size: 1.2rem; bottom: -5px; right: -5px; text-shadow: none; }
     .food-item.eaten { background: #E8F5E9; border-color: #C8E6C9; box-shadow: 0 4px 0 #A5D6A7; transform: scale(0.95); pointer-events: none; filter: grayscale(100%) opacity(0.5); }
-    .action-buttons { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .action-buttons { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .btn { border: none; border-radius: 20px; font-weight: 900; cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; text-align: center; outline: none; display: inline-flex; justify-content: center; align-items: center; }
     .btn-large { width: 100%; padding: 16px; font-size: 1.4rem; }
     .btn-primary { background: var(--secondary); color: white; box-shadow: 0 8px 0 var(--secondary-shadow); }
@@ -140,7 +140,7 @@
 </div>
 
 <script>
-const eeveeEvolutions = [
+  const eeveeEvolutions = [
   { id: 134, name: "シャワーズ" }, { id: 135, name: "サンダース" }, { id: 136, name: "ブースター" },
   { id: 196, name: "エーフィ" }, { id: 197, name: "ブラッキー" }, { id: 470, name: "リーフィア" },
   { id: 471, name: "グレイシア" }, { id: 700, name: "ニンフィア" }
@@ -218,7 +218,7 @@ const baseQ2 = [
   { text: "きょうの<br>つぎの ひは？", correct: "あした", options: ["あした", "きのう", "あさって", "おととい"] },
   { text: "あしたの<br>つぎの ひは？", correct: "あさって", options: ["あさって", "きのう", "あした", "おととい"] },
   { text: "ひるの<br>まえの じかんは？", correct: "あさ", options: ["あさ", "よる", "ゆうがた", "よなか"] },
-  { text: "ごはんをたべる<br>「あさ」の つぎは？", correct: "ひる", options: ["ひる", "よる", "ゆうがた", "よなか"] },
+  { text: "「あさ」の<br>つぎの じかんは？", correct: "ひる", options: ["ひる", "よる", "ゆうがた", "よなか"] },
   { text: "おほしさまが でる<br>じかんは？", correct: "よる", options: ["よる", "あさ", "ひる", "ゆうがた"] },
   { text: "あたたかい<br>「はる」の つぎは？", correct: "なつ", options: ["なつ", "あき", "ふゆ", "あさ"] },
   { text: "すずしい<br>「あき」の つぎは？", correct: "ふゆ", options: ["ふゆ", "なつ", "はる", "よる"] }
@@ -248,34 +248,33 @@ const baseQ3 = [
 ];
 
 const baseQ4 = [
-  { text: "「おおきい」の<br>はんたいは？", type: "opp", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
-  { text: "「あつい」の<br>はんたいは？", type: "opp", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
-  { text: "「たかい」の<br>はんたいは？", type: "opp", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
-  { text: "「はやい」の<br>はんたいは？", type: "opp", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
-  { text: "「あかるい」の<br>はんたいは？", type: "opp", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] },
-  { text: "「ながい」の<br>はんたいは？", type: "opp", correct: "みじかい", options: ["みじかい", "かるい", "ひろい", "ちいさい"] },
-  { text: "「おもい」の<br>はんたいは？", type: "opp", correct: "かるい", options: ["かるい", "やわらかい", "ちいさい", "おそい"] },
-  { text: "「かたい」の<br>はんたいは？", type: "opp", correct: "やわらかい", options: ["やわらかい", "かるい", "ひくい", "ちいさい"] },
-  { text: "「ひろい」の<br>はんたいは？", type: "opp", correct: "せまい", options: ["せまい", "くらい", "ひくい", "おそい"] },
-  { text: "「とおい」の<br>はんたいは？", type: "opp", correct: "ちかい", options: ["ちかい", "せまい", "ひくい", "かるい"] },
-  { text: "「あたらしい」の<br>はんたいは？", type: "opp", correct: "ふるい", options: ["ふるい", "くらい", "おそい", "ちいさい"] },
-  { text: "「うえ」の<br>はんたいは？", type: "opp", correct: "した", options: ["した", "みぎ", "まえ", "なか"] },
-  { text: "「みぎ」の<br>はんたいは？", type: "opp", correct: "ひだり", options: ["ひだり", "した", "うしろ", "そと"] },
-  { text: "「まえ」の<br>はんたいは？", type: "opp", correct: "うしろ", options: ["うしろ", "した", "ひだり", "そと"] },
-  { text: "「なか」の<br>はんたいは？", type: "opp", correct: "そと", options: ["そと", "した", "ひだり", "うしろ"] },
-  { text: "「あける」の<br>はんたいは？", type: "opp", correct: "しめる", options: ["しめる", "くだる", "くる", "なく"] },
-  { text: "「のぼる」の<br>はんたいは？", type: "opp", correct: "くだる", options: ["くだる", "しめる", "くる", "ねる"] },
-  { text: "「いく」の<br>はんたいは？", type: "opp", correct: "くる", options: ["くる", "くだる", "なく", "でる"] },
-  { text: "「わらう」の<br>はんたいは？", type: "opp", correct: "なく", options: ["なく", "くる", "おきる", "でる"] },
-  { text: "「ねる」の<br>はんたいは？", type: "opp", correct: "おきる", options: ["おきる", "なく", "くる", "しめる"] },
-  { text: "「はいる」の<br>はんたいは？", type: "opp", correct: "でる", options: ["でる", "くる", "おきる", "くだる"] },
-  { text: "「あさ」の<br>はんたいは？", type: "opp", correct: "よる", options: ["よる", "ひる", "ゆうがた", "あした"] },
-  { text: "「すき」の<br>はんたいは？", type: "opp", correct: "きらい", options: ["きらい", "こわい", "いたい", "わるい"] },
-  { text: "「かつ」の<br>はんたいは？", type: "opp", correct: "まける", options: ["まける", "なく", "でる", "くる"] },
-  { text: "「いい」の<br>はんたいは？", type: "opp", correct: "わるい", options: ["わるい", "こわい", "いたい", "きらい"] }
+  { text: "「おおきい」の<br>はんたいは？", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
+  { text: "「あつい」の<br>はんたいは？", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
+  { text: "「たかい」の<br>はんたいは？", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
+  { text: "「はやい」の<br>はんたいは？", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
+  { text: "「あかるい」の<br>はんたいは？", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] },
+  { text: "「ながい」の<br>はんたいは？", correct: "みじかい", options: ["みじかい", "かるい", "ひろい", "ちいさい"] },
+  { text: "「おもい」の<br>はんたいは？", correct: "かるい", options: ["かるい", "やわらかい", "ちいさい", "おそい"] },
+  { text: "「かたい」の<br>はんたいは？", correct: "やわらかい", options: ["やわらかい", "かるい", "ひくい", "ちいさい"] },
+  { text: "「ひろい」の<br>はんたいは？", correct: "せまい", options: ["せまい", "くらい", "ひくい", "おそい"] },
+  { text: "「とおい」の<br>はんたいは？", correct: "ちかい", options: ["ちかい", "せまい", "ひくい", "かるい"] },
+  { text: "「あたらしい」の<br>はんたいは？", correct: "ふるい", options: ["ふるい", "くらい", "おそい", "ちいさい"] },
+  { text: "「うえ」の<br>はんたいは？", correct: "した", options: ["した", "みぎ", "まえ", "なか"] },
+  { text: "「みぎ」の<br>はんたいは？", correct: "ひだり", options: ["ひだり", "した", "うしろ", "そと"] },
+  { text: "「まえ」の<br>はんたいは？", correct: "うしろ", options: ["うしろ", "した", "ひだり", "そと"] },
+  { text: "「なか」の<br>はんたいは？", correct: "そと", options: ["そと", "した", "ひだり", "うしろ"] },
+  { text: "「あける」の<br>はんたいは？", correct: "しめる", options: ["しめる", "くだる", "くる", "なく"] },
+  { text: "「のぼる」の<br>はんたいは？", correct: "くだる", options: ["くだる", "しめる", "くる", "ねる"] },
+  { text: "「いく」の<br>はんたいは？", correct: "くる", options: ["くる", "くだる", "なく", "でる"] },
+  { text: "「わらう」の<br>はんたいは？", correct: "なく", options: ["なく", "くる", "おきる", "でる"] },
+  { text: "「ねる」の<br>はんたいは？", correct: "おきる", options: ["おきる", "なく", "くる", "しめる"] },
+  { text: "「はいる」の<br>はんたいは？", correct: "でる", options: ["でる", "くる", "おきる", "くだる"] },
+  { text: "「あさ」の<br>はんたいは？", correct: "よる", options: ["よる", "ひる", "ゆうがた", "あした"] },
+  { text: "「すき」の<br>はんたいは？", correct: "きらい", options: ["きらい", "こわい", "いたい", "わるい"] },
+  { text: "「かつ」の<br>はんたいは？", correct: "まける", options: ["まける", "なく", "でる", "くる"] },
+  { text: "「いい」の<br>はんたいは？", correct: "わるい", options: ["わるい", "こわい", "いたい", "きらい"] }
 ];
-
-const appliedQ1 = [
+  const appliedQ1 = [
   { text: "「山」は<br>なんて よむ？", correct: "やま", options: ["やま", "かわ", "うみ", "そら"] },
   { text: "「川」は<br>なんて よむ？", correct: "かわ", options: ["かわ", "やま", "いけ", "みず"] },
   { text: "「日」は<br>なんて よむ？", correct: "ひ", options: ["ひ", "つき", "ほし", "き"] },
@@ -326,8 +325,7 @@ const appliedQ4 = [
   { text: "わらう かどには ( ___ ) きたる", correct: "ふく", options: ["ふく", "かね", "かみ", "ひと"] },
   { text: "はなより ( ___ )", correct: "だんご", options: ["だんご", "おかし", "ジュース", "みかん"] }
 ];
-
-function getPokemonImageUrl(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`; }
+  function getPokemonImageUrl(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`; }
 
 let isAppliedMode = false;
 let baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
@@ -341,34 +339,6 @@ const foodListEl = document.getElementById('food-list'), expText = document.getE
 const partnerImg = document.getElementById('partner-image'), partnerName = document.getElementById('partner-name');
 const resetGameBtn = document.getElementById('reset-game-btn');
 const partnerStage = document.getElementById('partner-stage');
-
-function playDoubleJumpSound(callback) {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) { if(callback) callback(); return; }
-    const ctx = new AudioCtx();
-    
-    function playSingle(time) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(180, time);
-      osc.frequency.exponentialRampToValueAtTime(600, time + 0.12);
-      gain.gain.setValueAtTime(0.3, time);
-      gain.gain.linearRampToValueAtTime(0.01, time + 0.12);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(time);
-      osc.stop(time + 0.12);
-    }
-    
-    const now = ctx.currentTime;
-    playSingle(now);
-    playSingle(now + 0.2);
-    
-    setTimeout(() => { if(callback) callback(); }, 450);
-  } catch(e) { if(callback) callback(); }
-}
 
 function initBaseMode() {
   baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
@@ -567,50 +537,20 @@ function showNextQuestion() {
   }
 }
 
-function renderQuestionCard(container, dataList, titleText) {
-  const q = dataList[Math.floor(Math.random() * dataList.length)];
+function speakTextWithBlank(text1, text2) {
+  const msg1 = new SpeechSynthesisUtterance(text1);
+  msg1.lang = 'ja-JP';
+  if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
+  const jaVoice = synthVoices.find(v => v.lang.startsWith('ja'));
+  if (jaVoice) msg1.voice = jaVoice;
+  msg1.pitch = 1.1; msg1.rate = 0.9;
   
-  container.innerHTML = `
-    <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
-      <p class="question-sub" style="margin:0;">${titleText}</p>
-      <button class="voice-btn" id="q-voice-btn">🔊</button>
-    </div>
-    <div class="question-word">${q.text}</div>
-    <div class="options-grid" id="q-opts"></div>
-  `;
-
-  document.getElementById('q-voice-btn').onclick = () => {
-    let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
-    cleanText = cleanText.replace(/[\u1F600-\u1F64F\u1F300-\u1F5FF\u1F680-\u1F6FF\u2600-\u26FF\u2700-\u27BF]/g, '');
-
-    if (q.type !== 'opp') { cleanText = cleanText.replace(/「[^」]+」/g, 'これ'); }
-
-    const hasBlank = cleanText.includes('( ___ )');
-
-    if (hasBlank) {
-      const parts = cleanText.split('( ___ )');
-      speakJapaneseVoice(parts[0].trim());
-      
-      setTimeout(() => {
-        playDoubleJumpSound(() => {
-          if (parts[1] && parts[1].trim()) {
-            setTimeout(() => { speakJapaneseVoice(parts[1].trim()); }, 300);
-          }
-        });
-      }, 500);
-    } else {
-      speakJapaneseVoice(cleanText);
-    }
+  msg1.onend = () => {
+    setTimeout(() => {
+      if(text2) speakJapaneseVoice(text2);
+    }, 1000); // 無言で1秒待つ！
   };
-
-  const optsGrid = document.getElementById('q-opts');
-  q.options.slice().sort(() => 0.5 - Math.random()).forEach(opt => {
-    const btn = document.createElement('div'); btn.className = 'option-btn'; btn.innerText = opt;
-    btn.onclick = () => checkAnswer(opt === q.correct, q.correct);
-    optsGrid.appendChild(btn);
-  });
-
-  setTimeout(() => { document.getElementById('q-voice-btn').click(); }, 300);
+  window.speechSynthesis.speak(msg1);
 }
 
 function speakJapaneseVoice(text) {
@@ -630,6 +570,49 @@ function speakEnglishVoice(text) {
   if (enVoice) msg.voice = enVoice;
   msg.pitch = 1.1; msg.rate = 0.8;
   window.speechSynthesis.speak(msg);
+}
+
+function renderQuestionCard(container, dataList, titleText) {
+  const q = dataList[Math.floor(Math.random() * dataList.length)];
+  
+  container.innerHTML = `
+    <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
+      <p class="question-sub" style="margin:0;">${titleText}</p>
+      <button class="voice-btn" id="q-voice-btn">🔊</button>
+    </div>
+    <div class="question-word">${q.text}</div>
+    <div class="options-grid" id="q-opts"></div>
+  `;
+
+  document.getElementById('q-voice-btn').onclick = () => {
+    let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
+    
+    // 絵文字を完全に除去（サロゲートペア対応）
+    cleanText = cleanText.replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF]|[\u2011-\u26FF]/g, '');
+    
+    // 漢字や日付けの「読みを問う問題」だけ「これ」に置換
+    if (cleanText.includes('なんて よむ')) {
+      cleanText = cleanText.replace(/「[^」]+」/g, 'これ');
+    }
+
+    const hasBlank = cleanText.includes('( ___ )');
+
+    if (hasBlank) {
+      const parts = cleanText.split('( ___ )');
+      speakTextWithBlank(parts[0].trim(), parts[1] ? parts[1].trim() : "");
+    } else {
+      speakJapaneseVoice(cleanText);
+    }
+  };
+
+  const optsGrid = document.getElementById('q-opts');
+  q.options.slice().sort(() => 0.5 - Math.random()).forEach(opt => {
+    const btn = document.createElement('div'); btn.className = 'option-btn'; btn.innerText = opt;
+    btn.onclick = () => checkAnswer(opt === q.correct, q.correct);
+    optsGrid.appendChild(btn);
+  });
+
+  setTimeout(() => { document.getElementById('q-voice-btn').click(); }, 300);
 }
 
 function checkAnswer(isCorrect, answerText) {
