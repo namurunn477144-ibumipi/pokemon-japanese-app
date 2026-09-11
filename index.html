@@ -15,7 +15,7 @@
       --bg-dot: #CE93D8;
     }
     
-    /* チャレンジモード（ビタミンオレンジイエロー系：色味の差をさらに強調！） */
+    /* チャレンジモード（ビタミンオレンジイエロー系） */
     body.mode-applied {
       --primary: #FF8F00; --primary-shadow: #E65100;
       --secondary: #0288D1; --secondary-shadow: #01579B;
@@ -37,17 +37,14 @@
     /* ステージ背景の設定 */
     .partner-stage { position: relative; width: 100%; border-radius: 24px; padding: 40px 20px 20px; border: 4px solid #FFF; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: background 0.5s; }
     
-    /* ① ラブリー背景（初期） */
     .partner-stage.bg-lovely { background: linear-gradient(180deg, #FFF0F5 0%, #FFD1DC 100%); }
     .partner-stage.bg-lovely::before { content: '💖✨'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.7; }
     .partner-stage.bg-lovely::after { content: '✨💖'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.7; }
 
-    /* ② うみ背景（1段階進化後） */
     .partner-stage.bg-sea { background: linear-gradient(180deg, #E0F7FA 0%, #80DEEA 100%); border-color: #4FC3F7; }
     .partner-stage.bg-sea::before { content: '🌊🐚'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.8; }
     .partner-stage.bg-sea::after { content: '🐬🌊'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.8; }
 
-    /* ③ カッコいい背景（2段階最終進化後：ゴールドキラキラ） */
     .partner-stage.bg-cool { background: linear-gradient(180deg, #2A0845 0%, #6441A5 100%); border-color: #FFD700; }
     .partner-stage.bg-cool::before { content: '⚡⭐'; position: absolute; bottom: 8px; left: 12px; font-size: 1.2rem; opacity: 0.8; }
     .partner-stage.bg-cool::after { content: '⭐⚡'; position: absolute; bottom: 8px; right: 12px; font-size: 1.2rem; opacity: 0.8; }
@@ -104,13 +101,14 @@
     
     .quiz-header-bar { margin-bottom: 15px; }
     .badge { background: var(--primary); color: #FFF; padding: 8px 20px; border-radius: 20px; font-size: 1.2rem; font-weight: 900; box-shadow: 0 4px 0 var(--primary-shadow); }
-    .quiz-card { background: var(--card-bg); width: 100%; padding: 24px; border-radius: 24px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border: 4px solid #FFF; text-align: center; }
+    .quiz-card { background: var(--card-bg); width: 100%; padding: 20px; border-radius: 24px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border: 4px solid #FFF; text-align: center; }
     
-    .question-word { font-size: 2.2rem; font-weight: 900; color: #333; margin: 15px 0; line-height: 1.4; }
-    .question-sub { font-size: 1.3rem; color: #666; margin-bottom: 15px; font-weight: 800; }
+    /* 絶妙な文字サイズ調整（1.8rem）で自然な改行を実現 */
+    .question-word { font-size: 1.8rem; font-weight: 900; color: #333; margin: 15px 0; line-height: 1.4; word-break: keep-all; }
+    .question-sub { font-size: 1.2rem; color: #666; margin-bottom: 10px; font-weight: 800; }
     
     .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-    .option-btn { background: #FFF; border: 4px solid var(--primary); border-radius: 16px; padding: 15px; font-size: 1.5rem; font-weight: 900; color: var(--text-main); display: flex; justify-content: center; align-items: center; box-shadow: 0 6px 0 var(--primary); cursor: pointer; transition: 0.1s; }
+    .option-btn { background: #FFF; border: 4px solid var(--primary); border-radius: 16px; padding: 12px; font-size: 1.4rem; font-weight: 900; color: var(--text-main); display: flex; justify-content: center; align-items: center; box-shadow: 0 6px 0 var(--primary); cursor: pointer; transition: 0.1s; }
     .option-btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary); }
     
     .voice-btn { background: var(--secondary); box-shadow: 0 6px 0 var(--secondary-shadow); border-radius: 50%; border: none; color: white; cursor: pointer; display:inline-flex; justify-content:center; align-items:center; transition: 0.1s; width: 50px; height: 50px; font-size: 1.5rem;}
@@ -225,11 +223,10 @@ const effectEmojis = ["💖", "✨", "⭐", "🎵"];
 const correctTexts = ["せいかい！すごい！", "かんぺき！", "すばらしい！", "やったね！", "さすが！"];
 const incorrectTexts = ["おしい！もういちど！", "どんまい！", "つぎは がんばろう！", "ファイト！", "ざんねん！"];
 
-// 算数・英語と統一したボイス
 const correctVoices = ["やったー！", "せいかい！", "Great!", "Good job!"];
 const incorrectVoices = ["おしい！", "もういっかい！", "Oh no!", "Almost!"];
 
-// 【かんたんモード】問題データ（丁寧な改行入り）
+// 【かんたんモード】問題データ（改行調整済み）
 const baseQ1 = [
   { text: "ママ ( ___ )<br>ゴロゴロする。", correct: "が", options: ["が", "を", "へ", "に"] },
   { text: "パパ ( ___ )<br>ゆづちゃんと あそぶ。", correct: "が", options: ["が", "を", "へ", "に"] },
@@ -253,22 +250,24 @@ const baseQ2 = [
   { text: "きょうの<br>つぎの ひは？", correct: "あした", options: ["あした", "きのう", "あさって", "おとつい"] }
 ];
 
+// 重複読み上げを防ぐ修正
 const baseQ3 = [
-  { text: "えんぴつ（✏️）は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "さつ"] },
-  { text: "かみ（📄）は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "さつ", "こ"] },
-  { text: "本（📖）は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
-  { text: "いぬ（🐶）は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "だい"] },
-  { text: "ぞう（🐘）は<br>どうやって かぞえる？", correct: "とう", options: ["とう", "ひき", "わ", "こ"] }
+  { text: "えんぴつ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "さつ"] },
+  { text: "かみ は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "さつ", "こ"] },
+  { text: "本 は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
+  { text: "いぬ は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "だい"] },
+  { text: "ぞう は<br>どうやって かぞえる？", correct: "とう", options: ["とう", "ひき", "わ", "こ"] }
 ];
 
+// 対義語のお題はそのまま読む
 const baseQ4 = [
-  { text: "「おおきい」の<br>はんたいは？", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
-  { text: "「あつい」の<br>はんたいは？", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
-  { text: "「たかい」の<br>はんたいは？", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
-  { text: "「はやい」の<br>はんたいは？", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
-  { text: "「あかるい」の<br>はんたいは？", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] }
+  { text: "「おおきい」の<br>はんたいは？", type: "opp", target: "おおきい", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
+  { text: "「あつい」の<br>はんたいは？", type: "opp", target: "あつい", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
+  { text: "「たかい」の<br>はんたいは？", type: "opp", target: "たかい", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
+  { text: "「はやい」の<br>はんたいは？", type: "opp", target: "はやい", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
+  { text: "「あかるい」の<br>はんたいは？", type: "opp", target: "あかるい", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] }
 ];
-  // 【チャレンジモード】問題データ（丁寧な改行入り）
+  // 【チャレンジモード】問題データ
 const appliedQ1 = [
   { text: "「山」は<br>なんて よむ？", correct: "やま", options: ["やま", "かわ", "うみ", "そら"] },
   { text: "「川」は<br>なんて よむ？", correct: "かわ", options: ["かわ", "やま", "いけ", "みず"] },
@@ -283,11 +282,11 @@ const appliedQ1 = [
 ];
 
 const appliedQ2 = [
-  { text: "あめが ( ___ )<br>ふっている。", correct: "ざーざー", options: ["ざーざー", "ぱくぱく", "すやすや", "にこにこ"] },
-  { text: "赤ちゃんが ( ___ )<br>ねている。", correct: "すやすや", options: ["すやすや", "ざーざー", "ごろごろ", "ばたばた"] },
-  { text: "ごはんを ( ___ )<br>たべる。", correct: "もりもり", options: ["もりもり", "すらすら", "さらさら", "ころころ"] },
-  { text: "かぜが ( ___ )<br>ふいている。", correct: "ひゅーひゅー", options: ["ひゅーひゅー", "ぱくぱく", "にこにこ", "ぐうぐう"] },
-  { text: "いぬが ( ___ )<br>ほえている。", correct: "わんわん", options: ["わんわん", "にゃーにゃー", "もーもー", "けろけろ"] }
+  { text: "あめが ( ___ )<br>ふっている", correct: "ざーざー", options: ["ざーざー", "ぱくぱく", "すやすや", "にこにこ"] },
+  { text: "赤ちゃんが ( ___ )<br>ねている", correct: "すやすや", options: ["すやすや", "ざーざー", "ごろごろ", "ばたばた"] },
+  { text: "ごはんを ( ___ )<br>たべる", correct: "もりもり", options: ["もりもり", "すらすら", "さらさら", "ころころ"] },
+  { text: "かぜが ( ___ )<br>ふいている", correct: "ひゅーひゅー", options: ["ひゅーひゅー", "ぱくぱく", "にこにこ", "ぐうぐう"] },
+  { text: "いぬが ( ___ )<br>ほえている", correct: "わんわん", options: ["わんわん", "にゃーにゃー", "もーもー", "けろけろ"] }
 ];
 
 const appliedQ3 = [
@@ -299,11 +298,11 @@ const appliedQ3 = [
 ];
 
 const appliedQ4 = [
-  { text: "( ___ ) も<br>木から おちる。", correct: "さる", options: ["さる", "いぬ", "ねこ", "うさぎ"] },
-  { text: "早起きは ( ___ )<br>の とく。", correct: "さんもん", options: ["さんもん", "ひゃくえん", "いちもん", "じゅうえん"] },
-  { text: "犬も あるけば ( ___ )<br>に あたる。", correct: "ぼう", options: ["ぼう", "いし", "かべ", "木"] },
-  { text: "ちりも つもれば ( ___ )<br>と なる。", correct: "やま", options: ["やま", "かわ", "うみ", "いし"] },
-  { text: "ねこに ( ___ )。", correct: "こばん", options: ["こばん", "おかし", "おもちゃ", "みず"] }
+  { text: "( ___ ) も<br>木から おちる", correct: "さる", options: ["さる", "いぬ", "ねこ", "うさぎ"] },
+  { text: "早起きは ( ___ )<br>の とく", correct: "さんもん", options: ["さんもん", "ひゃくえん", "いちもん", "じゅうえん"] },
+  { text: "犬も あるけば ( ___ )<br>に あたる", correct: "ぼう", options: ["ぼう", "いし", "かべ", "木"] },
+  { text: "ちりも つもれば ( ___ )<br>と なる", correct: "やま", options: ["やま", "かわ", "うみ", "いし"] },
+  { text: "ねこに ( ___ )", correct: "こばん", options: ["こばん", "おかし", "おもちゃ", "みず"] }
 ];
   function getPokemonImageUrl(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`; }
 
@@ -320,28 +319,37 @@ const partnerImg = document.getElementById('partner-image'), partnerName = docum
 const resetGameBtn = document.getElementById('reset-game-btn');
 const partnerStage = document.getElementById('partner-stage');
 
-// Web Audio API でマリオのジャンプ音風効果音を生成
-function playJumpSound() {
+// Web Audio API によるポヨン音（ぽわん×2回）
+function playDoubleJumpSound(callback) {
   try {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
+    if (!AudioCtx) { if(callback) callback(); return; }
     const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
     
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(150, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.15);
+    function playSingle(time) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(160, time);
+      osc.frequency.exponentialRampToValueAtTime(550, time + 0.12);
+      gain.gain.setValueAtTime(0.25, time);
+      gain.gain.linearRampToValueAtTime(0.01, time + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(time);
+      osc.stop(time + 0.12);
+    }
     
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+    const now = ctx.currentTime;
+    playSingle(now);
+    playSingle(now + 0.18);
     
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    
-    osc.start();
-    osc.stop(ctx.currentTime + 0.15);
-  } catch(e) {}
+    setTimeout(() => {
+      if(callback) callback();
+    }, 450);
+  } catch(e) {
+    if(callback) callback();
+  }
 }
 
 function initBaseMode() {
@@ -379,7 +387,7 @@ function updateStageBackground() {
     } else if (appliedState.stage === 1) {
       partnerStage.classList.add('bg-sea');
     } else {
-      partnerStage.classList.add('bg-cool'); // 2段階最終進化後はカッコいいゴールドキラキラ背景
+      partnerStage.classList.add('bg-cool');
     }
   }
 }
@@ -567,21 +575,31 @@ function renderQuestionCard(container, dataList, titleText) {
   `;
 
   document.getElementById('q-voice-btn').onclick = () => {
-    let cleanText = q.text.replace(/<br>/g, ' ');
-    const hasBlank = cleanText.includes('( ___ )');
+    // 改行・「まる」「てん」などの記号をきれいに除去
+    let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
     
-    // ネタバレ防止：漢字（山・川など）や「1日」などは「これ」と読み上げ
-    cleanText = cleanText.replace(/「[^」]+」/g, 'これ');
+    // 絵文字やカッコ書き表記の除去（例: （🍎）や ✏️ を読まないようにする）
+    cleanText = cleanText.replace(/[\u1F600-\u1F64F\u1F300-\u1F5FF\u1F680-\u1F6FF\u2600-\u26FF\u2700-\u27BF]/g, '').replace(/（[^）]*）/g, '');
+
+    // ネタバレ防止：漢字問題や日付問題は「これ」と発音
+    if (q.type !== 'opp') {
+      cleanText = cleanText.replace(/「[^」]+」/g, 'これ');
+    }
+
+    const hasBlank = cleanText.includes('( ___ )');
 
     if (hasBlank) {
       const parts = cleanText.split('( ___ )');
       speakJapaneseVoice(parts[0].trim());
+      
+      // ポンポンと音を鳴らしてから後半を喋る
       setTimeout(() => {
-        playJumpSound(); // マリオ風ポヨン効果音
-        if (parts[1] && parts[1].trim()) {
-          setTimeout(() => { speakJapaneseVoice(parts[1].trim()); }, 400);
-        }
-      }, 600);
+        playDoubleJumpSound(() => {
+          if (parts[1] && parts[1].trim()) {
+            setTimeout(() => { speakJapaneseVoice(parts[1].trim()); }, 300);
+          }
+        });
+      }, 500);
     } else {
       speakJapaneseVoice(cleanText);
     }
@@ -610,7 +628,6 @@ function speakJapaneseVoice(text) {
   window.speechSynthesis.speak(msg);
 }
 
-// 英語ボイス用（Good job! など）
 function speakEnglishVoice(text) {
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
