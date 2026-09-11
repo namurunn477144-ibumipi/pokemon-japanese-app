@@ -220,7 +220,7 @@ const baseQ3 = [
 
 const baseQ4 = [
   { text: "「おおきい」の<br>はんたいは？", type: "opp", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
-  { text: "「あつい」の<br>はんたいは？", type: "opp", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
+  { text: "「あツイ」の<br>はんたいは？", type: "opp", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
   { text: "「たかい」の<br>はんたいは？", type: "opp", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
   { text: "「はやい」の<br>はんたいは？", type: "opp", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
   { text: "「あかるい」の<br>はんたいは？", type: "opp", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] }
@@ -263,7 +263,6 @@ const appliedQ4 = [
   { text: "ねこに ( ___ )", correct: "こばん", options: ["こばん", "おかし", "おもちゃ", "みず"] }
 ];
 
-// 出題順の均等化（重複防止プール）
 let questionPools = {};
 
 function getNextQuestionFromPool(key, dataList) {
@@ -287,38 +286,6 @@ const foodListEl = document.getElementById('food-list'), expText = document.getE
 const partnerImg = document.getElementById('partner-image'), partnerName = document.getElementById('partner-name');
 const resetGameBtn = document.getElementById('reset-game-btn');
 const partnerStage = document.getElementById('partner-stage');
-
-function playDoubleJumpSound(callback) {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) { if(callback) callback(); return; }
-    const ctx = new AudioCtx();
-    
-    function playSingle(time) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(180, time);
-      osc.frequency.exponentialRampToValueAtTime(600, time + 0.12);
-      gain.gain.setValueAtTime(0.3, time);
-      gain.gain.linearRampToValueAtTime(0.01, time + 0.12);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(time);
-      osc.stop(time + 0.12);
-    }
-    
-    const now = ctx.currentTime;
-    playSingle(now);
-    playSingle(now + 0.2);
-    
-    setTimeout(() => {
-      if(callback) callback();
-    }, 450);
-  } catch(e) {
-    if(callback) callback();
-  }
-}
 
 function initBaseMode() {
   baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
@@ -544,29 +511,15 @@ function renderQuestionCard(container, dataList, titleText, poolKey) {
 
   document.getElementById('q-voice-btn').onclick = () => {
     let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
-    // 絵文字や拡張Unicode記号を確実に削除
     cleanText = cleanText.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '');
 
     if (q.type !== 'opp') {
       cleanText = cleanText.replace(/「[^」]+」/g, 'これ');
     }
 
-    const hasBlank = cleanText.includes('( ___ )');
-
-    if (hasBlank) {
-      const parts = cleanText.split('( ___ )');
-      speakJapaneseVoice(parts[0].trim());
-      
-      setTimeout(() => {
-        playDoubleJumpSound(() => {
-          if (parts[1] && parts[1].trim()) {
-            setTimeout(() => { speakJapaneseVoice(parts[1].trim()); }, 300);
-          }
-        });
-      }, 500);
-    } else {
-      speakJapaneseVoice(cleanText);
-    }
+    // 穴あき部分を読まずに「1秒間の自然な間（タメ）」を空けて朗読
+    cleanText = cleanText.replace(/\( ___ \)/g, '、、、、');
+    speakJapaneseVoice(cleanText);
   };
 
   const optsGrid = document.getElementById('q-opts');
@@ -583,16 +536,18 @@ function renderQuestionCard(container, dataList, titleText, poolKey) {
 
 function speakJapaneseVoice(text) {
   if (!text) return;
+  window.speechSynthesis.cancel(); // 前の音声をクリア
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'ja-JP';
   if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
   const jaVoice = synthVoices.find(v => v.lang.startsWith('ja'));
   if (jaVoice) msg.voice = jaVoice;
-  msg.pitch = 1.1; msg.rate = 0.9;
+  msg.pitch = 1.1; msg.rate = 0.85;
   window.speechSynthesis.speak(msg);
 }
 
 function speakEnglishVoice(text) {
+  window.speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
@@ -640,6 +595,5 @@ window.onload = () => {
   renderRoom(); 
 };
 </script>
-  
 </body>
 </html>
