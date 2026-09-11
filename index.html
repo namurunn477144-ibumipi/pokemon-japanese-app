@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>こくごクイズ - いぶちゃん・みーちゃん・ゆづちゃん</title>
+  <title>こくごクイズ - いぶちゃん・みーちゃん</title>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     /* ベース：かんたんモード（藤色・パープル系） */
@@ -66,7 +66,8 @@
     @keyframes chew { 0% { transform: scale(1); } 25% { transform: scale(1.15) rotate(-5deg); } 50% { transform: scale(0.95) rotate(5deg); } 75% { transform: scale(1.1) rotate(-3deg); } 100% { transform: scale(1); } }
     .anim-chew { animation: chew 0.5s ease-in-out !important; }
     
-    .eating-msg { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 1.5rem; color: #FF5722; font-weight: 900; opacity: 0; pointer-events: none; text-shadow: 2px 2px 0 #FFF; transition: all 0.3s; z-index: 20; white-space: nowrap; }
+    /* 食べる時のメッセージの見切れ修正（top位置を下げる） */
+    .eating-msg { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 1.5rem; color: #FF5722; font-weight: 900; opacity: 0; pointer-events: none; text-shadow: 2px 2px 0 #FFF; transition: all 0.3s; z-index: 30; white-space: nowrap; }
     .flying-food { position: fixed; font-size: 2.5rem; z-index: 1000; transition: all 0.5s cubic-bezier(0.5, -0.5, 1, 1); pointer-events: none; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
     .effect-anim { position: absolute; font-size: 2rem; bottom: 40%; opacity: 0; animation: floatUpEffect 1s ease-out; pointer-events: none; z-index: 15; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
     @keyframes floatUpEffect { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-70px) scale(1.5) rotate(15deg); opacity: 0; } }
@@ -103,9 +104,8 @@
     .badge { background: var(--primary); color: #FFF; padding: 8px 20px; border-radius: 20px; font-size: 1.2rem; font-weight: 900; box-shadow: 0 4px 0 var(--primary-shadow); }
     .quiz-card { background: var(--card-bg); width: 100%; padding: 20px; border-radius: 24px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border: 4px solid #FFF; text-align: center; }
     
-    /* 絶妙な文字サイズ調整（1.8rem）で自然な改行を実現 */
     .question-word { font-size: 1.8rem; font-weight: 900; color: #333; margin: 15px 0; line-height: 1.4; word-break: keep-all; }
-    .question-sub { font-size: 1.2rem; color: #666; margin-bottom: 10px; font-weight: 800; }
+    .question-sub { font-size: 1.2rem; color: #666; margin-bottom: 10px; font-weight: 800; line-height: 1.3; }
     
     .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
     .option-btn { background: #FFF; border: 4px solid var(--primary); border-radius: 16px; padding: 12px; font-size: 1.4rem; font-weight: 900; color: var(--text-main); display: flex; justify-content: center; align-items: center; box-shadow: 0 6px 0 var(--primary); cursor: pointer; transition: 0.1s; }
@@ -217,7 +217,8 @@ const allFoods = [
   { name: "パンケーキ", emoji: "🥞" }, { name: "ステーキ", emoji: "🥩" }, { name: "サンドイッチ", emoji: "🥪" }, { name: "たこやき", emoji: "🐙" }
 ];
 
-const pokeComments = ["たのしいね！", "だーいすき！", "いぶちゃん、がんばろうね！", "みーちゃん、がんばろうね！", "ゆづちゃん、がんばろうね！", "すごいすごい！", "えらいね！"];
+// ゆづちゃんを除外し、いぶちゃん・みーちゃんのみに！
+const pokeComments = ["たのしいね！", "だーいすき！", "いぶちゃん、がんばろうね！", "みーちゃん、がんばろうね！", "すごいすごい！", "えらいね！"];
 const effectEmojis = ["💖", "✨", "⭐", "🎵"];
 
 const correctTexts = ["せいかい！すごい！", "かんぺき！", "すばらしい！", "やったね！", "さすが！"];
@@ -226,18 +227,17 @@ const incorrectTexts = ["おしい！もういちど！", "どんまい！", "�
 const correctVoices = ["やったー！", "せいかい！", "Great!", "Good job!"];
 const incorrectVoices = ["おしい！", "もういっかい！", "Oh no!", "Almost!"];
 
-// 【かんたんモード】問題データ（改行調整済み）
+// 【かんたんモード】問題データ
 const baseQ1 = [
   { text: "ママ ( ___ )<br>ゴロゴロする。", correct: "が", options: ["が", "を", "へ", "に"] },
-  { text: "パパ ( ___ )<br>ゆづちゃんと あそぶ。", correct: "が", options: ["が", "を", "へ", "に"] },
+  { text: "パパ ( ___ )<br>あそぶ。", correct: "が", options: ["发", "が", "を", "へ"] },
   { text: "みーちゃん ( ___ )<br>こしょこしょする。", correct: "を", options: ["を", "は", "へ", "に"] },
   { text: "いぶちゃん ( ___ )<br>おかしを あげる。", correct: "に", options: ["に", "を", "へ", "が"] },
-  { text: "ゆづちゃん ( ___ )<br>だっこする。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "りんご ( ___ )<br>たべる。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "がっこう ( ___ )<br>いきます。", correct: "へ", options: ["へ", "を", "は", "が"] },
-  { text: "テレビ ( ___ )<br>みる。", correct: "を", options: ["を", "は", "へ", "に"] },
-  { text: "バス ( ___ )<br>のる。", correct: "に", options: ["に", "を", "へ", "で"] },
-  { text: "えほん ( ___ )<br>よむ。", correct: "を", options: ["を", "は", "へ", "に"] }
+  { text: "りんご 🍎 ( ___ )<br>たべる。", correct: "を", options: ["を", "は", "へ", "に"] },
+  { text: "がっこう 🏫 ( ___ )<br>いきます。", correct: "へ", options: ["へ", "を", "は", "が"] },
+  { text: "テレビ 📺 ( ___ )<br>みる。", correct: "を", options: ["を", "は", "へ", "に"] },
+  { text: "バス 🚌 ( ___ )<br>のる。", correct: "に", options: ["に", "を", "へ", "で"] },
+  { text: "えほん 📖 ( ___ )<br>よむ。", correct: "を", options: ["を", "は", "へ", "に"] }
 ];
 
 const baseQ2 = [
@@ -250,22 +250,21 @@ const baseQ2 = [
   { text: "きょうの<br>つぎの ひは？", correct: "あした", options: ["あした", "きのう", "あさって", "おとつい"] }
 ];
 
-// 重複読み上げを防ぐ修正
+// 3問目：カッコなしで隣に絵文字を配置
 const baseQ3 = [
-  { text: "えんぴつ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "さつ"] },
-  { text: "かみ は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "さつ", "こ"] },
-  { text: "本 は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
-  { text: "いぬ は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "だい"] },
-  { text: "ぞう は<br>どうやって かぞえる？", correct: "とう", options: ["とう", "ひき", "わ", "こ"] }
+  { text: "えんぴつ ✏️ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "さつ"] },
+  { text: "かみ 📄 は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "さつ", "こ"] },
+  { text: "本 📖 は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
+  { text: "いぬ 🐶 は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "だい"] },
+  { text: "ぞう 🐘 は<br>どうやって かぞえる？", correct: "とう", options: ["とう", "ひき", "わ", "こ"] }
 ];
 
-// 対義語のお題はそのまま読む
 const baseQ4 = [
-  { text: "「おおきい」の<br>はんたいは？", type: "opp", target: "おおきい", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
-  { text: "「あつい」の<br>はんたいは？", type: "opp", target: "あつい", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
-  { text: "「たかい」の<br>はんたいは？", type: "opp", target: "たかい", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
-  { text: "「はやい」の<br>はんたいは？", type: "opp", target: "はやい", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
-  { text: "「あかるい」の<br>はんたいは？", type: "opp", target: "あかるい", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] }
+  { text: "「おおきい」の<br>はんたいは？", type: "opp", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
+  { text: "「あつい」の<br>はんたいは？", type: "opp", correct: "つめたい", options: ["つめたい", "ちいさい", "ひろい", "くらい"] },
+  { text: "「たかい」の<br>はんたいは？", type: "opp", correct: "ひくい", options: ["ひくい", "おそい", "ながい", "かるい"] },
+  { text: "「はやい」の<br>はんたいは？", type: "opp", correct: "おそい", options: ["おそい", "ひくい", "ちいさい", "よわい"] },
+  { text: "「あかるい」の<br>はんたいは？", type: "opp", correct: "くらい", options: ["くらい", "おもい", "かたい", "ひくい"] }
 ];
   // 【チャレンジモード】問題データ
 const appliedQ1 = [
@@ -290,17 +289,18 @@ const appliedQ2 = [
 ];
 
 const appliedQ3 = [
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "バナナ（🍌）", options: ["バナナ（🍌）", "りんご（🍎）", "みかん（🍊）", "ぶどう（🍇）"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "バス（🚌）", options: ["バス（🚌）", "くるま（🚗）", "でんしゃ（🚃）", "ふね（🚢）"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ライオン（🦁）", options: ["ライオン（🦁）", "いぬ（🐶）", "ねこ（🐱）", "うさぎ（🐰）"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "くるま（🚗）", options: ["くるま（🚗）", "いぬ（🐶）", "ねこ（🐱）", "うさぎ（🐰）"] },
-  { text: "なかまはずれは<br>どれかな？", correct: "りんご（🍎）", options: ["りんご（🍎）", "バス（🚌）", "でんしゃ（🚃）", "ひこうき（✈️）"] }
+  { text: "カタカナで かくのは<br>どちらかな？", correct: "バナナ 🍌", options: ["バナナ 🍌", "りんご 🍎", "みかん 🍊", "ぶどう 🍇"] },
+  { text: "カタカナで かくのは<br>どちらかな？", correct: "バス 🚌", options: ["バス 🚌", "くるま 🚗", "でんしゃ 🚃", "ふね 🚢"] },
+  { text: "カタカナで かくのは<br>どちらかな？", correct: "ライオン 🦁", options: ["ライオン 🦁", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
+  { text: "なかまはずれは<br>どれかな？", correct: "くるま 🚗", options: ["くるま 🚗", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
+  { text: "なかまはずれは<br>どれかな？", correct: "りんご 🍎", options: ["りんご 🍎", "バス 🚌", "でんしゃ 🚃", "ひこうき ✈️"] }
 ];
 
+// ことわざの漢字をすべて「ひらがな」に変更！
 const appliedQ4 = [
-  { text: "( ___ ) も<br>木から おちる", correct: "さる", options: ["さる", "いぬ", "ねこ", "うさぎ"] },
-  { text: "早起きは ( ___ )<br>の とく", correct: "さんもん", options: ["さんもん", "ひゃくえん", "いちもん", "じゅうえん"] },
-  { text: "犬も あるけば ( ___ )<br>に あたる", correct: "ぼう", options: ["ぼう", "いし", "かべ", "木"] },
+  { text: "( ___ ) も<br>きから おちる", correct: "さる", options: ["さる", "いぬ", "ねこ", "うさぎ"] },
+  { text: "はやおきは ( ___ )<br>の とく", correct: "さんもん", options: ["さんもん", "ひゃくえん", "いちもん", "じゅうえん"] },
+  { text: "いぬも あるけば ( ___ )<br>に あたる", correct: "ぼう", options: ["ぼう", "いし", "かべ", "き"] },
   { text: "ちりも つもれば ( ___ )<br>と なる", correct: "やま", options: ["やま", "かわ", "うみ", "いし"] },
   { text: "ねこに ( ___ )", correct: "こばん", options: ["こばん", "おかし", "おもちゃ", "みず"] }
 ];
@@ -319,7 +319,7 @@ const partnerImg = document.getElementById('partner-image'), partnerName = docum
 const resetGameBtn = document.getElementById('reset-game-btn');
 const partnerStage = document.getElementById('partner-stage');
 
-// Web Audio API によるポヨン音（ぽわん×2回）
+// Web Audio API によるポヨン♪ポヨン♪再生
 function playDoubleJumpSound(callback) {
   try {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -330,9 +330,9 @@ function playDoubleJumpSound(callback) {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(160, time);
-      osc.frequency.exponentialRampToValueAtTime(550, time + 0.12);
-      gain.gain.setValueAtTime(0.25, time);
+      osc.frequency.setValueAtTime(180, time);
+      osc.frequency.exponentialRampToValueAtTime(600, time + 0.12);
+      gain.gain.setValueAtTime(0.3, time);
       gain.gain.linearRampToValueAtTime(0.01, time + 0.12);
       osc.connect(gain);
       gain.connect(ctx.destination);
@@ -342,7 +342,7 @@ function playDoubleJumpSound(callback) {
     
     const now = ctx.currentTime;
     playSingle(now);
-    playSingle(now + 0.18);
+    playSingle(now + 0.2);
     
     setTimeout(() => {
       if(callback) callback();
@@ -550,14 +550,14 @@ function showNextQuestion() {
   const contentEl = document.getElementById('quiz-content'); contentEl.innerHTML = "";
   
   if (!isAppliedMode) {
-    if (currentQIndex === 0) renderQuestionCard(contentEl, baseQ1, "あてはまる ことばを えらぼう！");
+    if (currentQIndex === 0) renderQuestionCard(contentEl, baseQ1, "あてはまる ことばを<br>えらぼう！");
     else if (currentQIndex === 1) renderQuestionCard(contentEl, baseQ2, "なんて よむかな？");
-    else if (currentQIndex === 2) renderQuestionCard(contentEl, baseQ3, "かぞえかたを えらぼう！");
-    else renderQuestionCard(contentEl, baseQ4, "はんたいの ことばを えらぼう！");
+    else if (currentQIndex === 2) renderQuestionCard(contentEl, baseQ3, "かぞえかたを<br>えらぼう！");
+    else renderQuestionCard(contentEl, baseQ4, "はんたいの ことばを<br>えらぼう！");
   } else {
     if (currentQIndex === 0) renderQuestionCard(contentEl, appliedQ1, "かんじを よんでみよう！");
-    else if (currentQIndex === 1) renderQuestionCard(contentEl, appliedQ2, "ぴったりな ことばを えらぼう！");
-    else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "グループの なかまを えらぼう！");
+    else if (currentQIndex === 1) renderQuestionCard(contentEl, appliedQ2, "ぴったりな ことばを<br>えらぼう！");
+    else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "グループの なかまを<br>えらぼう！");
     else renderQuestionCard(contentEl, appliedQ4, "ことわざを えらぼう！");
   }
 }
@@ -575,13 +575,9 @@ function renderQuestionCard(container, dataList, titleText) {
   `;
 
   document.getElementById('q-voice-btn').onclick = () => {
-    // 改行・「まる」「てん」などの記号をきれいに除去
     let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
-    
-    // 絵文字やカッコ書き表記の除去（例: （🍎）や ✏️ を読まないようにする）
-    cleanText = cleanText.replace(/[\u1F600-\u1F64F\u1F300-\u1F5FF\u1F680-\u1F6FF\u2600-\u26FF\u2700-\u27BF]/g, '').replace(/（[^）]*）/g, '');
+    cleanText = cleanText.replace(/[\u1F600-\u1F64F\u1F300-\u1F5FF\u1F680-\u1F6FF\u2600-\u26FF\u2700-\u27BF]/g, '');
 
-    // ネタバレ防止：漢字問題や日付問題は「これ」と発音
     if (q.type !== 'opp') {
       cleanText = cleanText.replace(/「[^」]+」/g, 'これ');
     }
@@ -592,7 +588,6 @@ function renderQuestionCard(container, dataList, titleText) {
       const parts = cleanText.split('( ___ )');
       speakJapaneseVoice(parts[0].trim());
       
-      // ポンポンと音を鳴らしてから後半を喋る
       setTimeout(() => {
         playDoubleJumpSound(() => {
           if (parts[1] && parts[1].trim()) {
