@@ -1254,7 +1254,12 @@ function renderQuestionCard(container, dataList, titleText) {
   `;
 
   document.getElementById('q-voice-btn').onclick = () => {
-    if (q.say) { speakJapaneseVoice(q.say); return; } // よみかたが きまっている もんだい（ちいさい じ）
+    // ちいさい じの もんだいは、ことばを よんでから もんだいぶんを よむ
+    if (q.say) {
+      const rest = q.text.includes('( ___ )') ? 'はてなに はいる ちいさい じは どれかな？' : 'は どう かく？';
+      speakSequence([{ text: q.say, lang: 'ja', pauseAfter: q.text.includes('( ___ )') ? 600 : 150 }, { text: rest, lang: 'ja' }]);
+      return;
+    }
     let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
     
     // 絵文字を完全に除去（サロゲートペア対応）
