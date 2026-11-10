@@ -273,6 +273,10 @@
     @media (prefers-reduced-motion: reduce) {
       #partner-image, .poke-wrap img, .poke-wrap::after, .food-item.ready, .bg-deco *, .partner-stage::after, .exp-bar-fill::after, #start-quiz-btn::after { animation: none !important; }
     }
+    /* 3Dの えもじ */
+    .emo { display: inline-block; width: 1.2em; height: 1.2em; object-fit: contain; vertical-align: -0.25em; -webkit-user-drag: none; }
+    .question-word .emo { width: 1.6em; height: 1.6em; vertical-align: -0.45em; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.12)); }
+    .question-emoji .emo, .opt-emoji .emo { width: 1.1em; height: 1.1em; vertical-align: middle; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.12)); }
   </style>
 </head>
 <body>
@@ -468,37 +472,44 @@ const baseQ2 = [
 ];
 
 const baseQ3 = [
-  { text: "えんぴつ ✏️ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "こ", "まい", "さつ"] },
-  { text: "かみ 📄 は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "さつ", "こ"] },
-  { text: "ほん 📖 は<br>どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "こ", "ほん"] },
-  { text: "いぬ 🐶 は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "とう", "わ", "だい"] },
-  { text: "ぞう 🐘 は<br>どうやって かぞえる？", correct: "とう", options: ["とう", "ひき", "わ", "こ"] },
-  { text: "とり 🐦 は<br>どうやって かぞえる？", correct: "わ", options: ["わ", "ひき", "こ", "とう"] },
-  { text: "くるま 🚗 は<br>どうやって かぞえる？", correct: "だい", options: ["だい", "だん", "こ", "まい"] },
-  { text: "くつ 👟 は<br>どうやって かぞえる？", correct: "そく", options: ["そく", "だい", "まい", "こ"] },
-  { text: "ハサミ ✂️ は<br>どうやって かぞえる？", correct: "ちょう", options: ["ちょう", "ほん", "こ", "まい"] },
-  { text: "ケーキ 🍰 は<br>どうやって かぞえる？", correct: "きれ", options: ["きれ", "こ", "まい", "ほん"] },
-  { text: "りんご 🍎 は<br>どうやって かぞえる？", correct: "こ", options: ["こ", "ほん", "まい", "さつ"] },
-  { text: "でんしゃ 🚃 は<br>どうやって かぞえる？", correct: "だい", options: ["だい", "りょう", "つ", "まい"] },
-  { text: "ひこうき ✈️ は<br>どうやって かぞえる？", correct: "き", options: ["き", "だい", "こ", "とう"] },
-  { text: "おさら 🍽️ は<br>どうやって かぞえる？", correct: "まい", options: ["まい", "こ", "つ", "さつ"] },
-  { text: "おはし 🥢 は<br>どうやって かぞえる？", correct: "ぜん", options: ["ぜん", "ほん", "くみ", "まい"] },
-  { text: "たんす 🗄️ は<br>どうやって かぞえる？", correct: "だい", options: ["だい", "さつ", "ほん", "こ"] },
-  { text: "うさぎ 🐰 は<br>どうやって かぞえる？", correct: "わ", options: ["わ", "ひき", "こ", "とう"] },
-  { text: "いえ 🏠 は<br>どうやって かぞえる？", correct: "けん", options: ["けん", "だい", "つ", "こ"] },
-  { text: "かさ ☂️ は<br>どうやって かぞえる？", correct: "ほん", options: ["ほん", "まい", "こ", "だい"] },
-  { text: "おさかな 🐟 は<br>どうやって かぞえる？", correct: "ひき", options: ["ひき", "わ", "まい", "とう"] },
-  { text: "ふく 👔 は<br>どうやって かぞえる？", correct: "ちゃく", options: ["ちゃく", "まい", "ほん", "こ"] },
-  { text: "ふね 🚢 は<br>どうやって かぞえる？", correct: "せき", options: ["せき", "だい", "せん", "こ"] },
-  { text: "かいだん 🪜 は<br>どうやって かぞえる？", correct: "だん", options: ["だん", "かい", "こ", "ほん"] },
-  { text: "マンション 🏢 の<br>かいすうは？", correct: "かい", options: ["かい", "だん", "こ", "けん"] },
-  { text: "ぶどう 🍇 は<br>どうやって かぞえる？", correct: "ふさ", options: ["ふさ", "こ", "ほん", "つぶ"] },
-  { text: "バナナ 🍌  は<br>どうやって かぞえる？", correct: "ふさ", options: ["ふさ", "ほん", "こ", "まい"] },
-  { text: "イチゴ 🍓  は<br>どうやって かぞえる？", correct: "つぶ", options: ["つぶ", "こ", "まい", "ほん"] },
-  { text: "おとうふ 🧊  は<br>どうやって かぞえる？", correct: "ちょう", options: ["ちょう", "こ", "まい", "ほん"] },
-  { text: "おてがみ ✉️  は<br>どうやって かぞえる？", correct: "つう", options: ["つう", "まい", "こ", "ほん"] },
-  { text: "ノート 📓  は<br>どうやって かぞえる？",correct: "さつ", options: ["さつ", "まい", "ほん", "こ"] }
-];
+  { text: "えんぴつ ✏️ は どうやって かぞえる？", correct: "ほん", options: ["ほん", "だい", "こ", "わ"] },
+  { text: "かさ ☂️ は どうやって かぞえる？", correct: "ほん", options: ["ほん", "とう", "こ", "だい"] },
+  { text: "にんじん 🥕 は どうやって かぞえる？", correct: "ほん", options: ["ほん", "ひき", "だい", "わ"] },
+  { text: "バナナ 🍌 は どうやって かぞえる？", correct: "ほん", options: ["ほん", "とう", "だい", "ひき"] },
+  { text: "ペン 🖊️ は どうやって かぞえる？", correct: "ほん", options: ["ほん", "さつ", "ひき", "だい"] },
+  { text: "かみ 📄 は どうやって かぞえる？", correct: "まい", options: ["まい", "だい", "こ", "ほん"] },
+  { text: "おさら 🍽️ は どうやって かぞえる？", correct: "まい", options: ["まい", "とう", "だい", "ほん"] },
+  { text: "シャツ 👕 は どうやって かぞえる？", correct: "まい", options: ["まい", "さつ", "とう", "こ"] },
+  { text: "はがき 📮 は どうやって かぞえる？", correct: "まい", options: ["まい", "ほん", "ひき", "だい"] },
+  { text: "クッキー 🍪 は どうやって かぞえる？", correct: "まい", options: ["まい", "さつ", "だい", "ほん"] },
+  { text: "ほん 📖 は どうやって かぞえる？", correct: "さつ", options: ["さつ", "わ", "こ", "とう"] },
+  { text: "ノート 📓 は どうやって かぞえる？", correct: "さつ", options: ["さつ", "まい", "ほん", "わ"] },
+  { text: "えほん 📚 は どうやって かぞえる？", correct: "さつ", options: ["さつ", "ひき", "こ", "だい"] },
+  { text: "いぬ 🐶 は どうやって かぞえる？", correct: "ひき", options: ["ひき", "だい", "まい", "さつ"] },
+  { text: "ねこ 🐱 は どうやって かぞえる？", correct: "ひき", options: ["ひき", "ほん", "まい", "わ"] },
+  { text: "おさかな 🐟 は どうやって かぞえる？", correct: "ひき", options: ["ひき", "まい", "だい", "わ"] },
+  { text: "かえる 🐸 は どうやって かぞえる？", correct: "ひき", options: ["ひき", "こ", "わ", "まい"] },
+  { text: "むし 🐛 は どうやって かぞえる？", correct: "ひき", options: ["ひき", "こ", "わ", "まい"] },
+  { text: "ぞう 🐘 は どうやって かぞえる？", correct: "とう", options: ["とう", "さつ", "まい", "こ"] },
+  { text: "うま 🐴 は どうやって かぞえる？", correct: "とう", options: ["とう", "ほん", "さつ", "わ"] },
+  { text: "うし 🐮 は どうやって かぞえる？", correct: "とう", options: ["とう", "こ", "だい", "さつ"] },
+  { text: "きりん 🦒 は どうやって かぞえる？", correct: "とう", options: ["とう", "ほん", "こ", "だい"] },
+  { text: "とり 🐦 は どうやって かぞえる？", correct: "わ", options: ["わ", "とう", "こ", "ほん"] },
+  { text: "にわとり 🐔 は どうやって かぞえる？", correct: "わ", options: ["わ", "さつ", "ひき", "ほん"] },
+  { text: "ペンギン 🐧 は どうやって かぞえる？", correct: "わ", options: ["わ", "ひき", "ほん", "だい"] },
+  { text: "くるま 🚗 は どうやって かぞえる？", correct: "だい", options: ["だい", "ほん", "こ", "わ"] },
+  { text: "バス 🚌 は どうやって かぞえる？", correct: "だい", options: ["だい", "ひき", "さつ", "こ"] },
+  { text: "じてんしゃ 🚲 は どうやって かぞえる？", correct: "だい", options: ["だい", "とう", "さつ", "まい"] },
+  { text: "でんしゃ 🚃 は どうやって かぞえる？", correct: "だい", options: ["だい", "さつ", "とう", "ひき"] },
+  { text: "りんご 🍎 は どうやって かぞえる？", correct: "こ", options: ["こ", "まい", "わ", "ひき"] },
+  { text: "ボール ⚽ は どうやって かぞえる？", correct: "こ", options: ["こ", "さつ", "ひき", "わ"] },
+  { text: "たまご 🥚 は どうやって かぞえる？", correct: "こ", options: ["こ", "さつ", "わ", "だい"] },
+  { text: "あめ 🍬 は どうやって かぞえる？", correct: "こ", options: ["こ", "まい", "わ", "ほん"] },
+  { text: "みかん 🍊 は どうやって かぞえる？", correct: "こ", options: ["こ", "ほん", "さつ", "まい"] },
+  { text: "くつ 👟 は どうやって かぞえる？", correct: "そく", options: ["そく", "ひき", "わ", "だい"] },
+  { text: "くつした 🧦 は どうやって かぞえる？", correct: "そく", options: ["そく", "ひき", "こ", "わ"] },
+  { text: "いえ 🏠 は どうやって かぞえる？", correct: "けん", options: ["けん", "ひき", "まい", "だい"] }
+]
 
 const baseQ4 = [
   { text: "「おおきい」の<br>はんたいは？", type: "opp", correct: "ちいさい", options: ["ちいさい", "つめたい", "たかい", "おそい"] },
@@ -691,38 +702,71 @@ const appliedQ3 = [
 ];
 
 // 4. ことわざ（30問・すべてひらがな）
+// ちいさい じ（ゃ・ゅ・ょ・っ・ィ・ェ・ォ）
 const appliedQ4 = [
-  { text: "( ___ ) も<br>きから おちる", correct: "さる", options: ["さる", "いぬ", "ねこ", "うさぎ"] },
-  { text: "はやおきは ( ___ )<br>の とく", correct: "さんもん", options: ["さんもん", "ひゃくえん", "いちもん", "じゅうえん"] },
-  { text: "いぬも あるけば ( ___ )<br>に あたる", correct: "ぼう", options: ["ぼう", "いし", "かべ", "き"] },
-  { text: "ちりも つもれば ( ___ )<br>と なる", correct: "やま", options: ["やま", "かわ", "うみ", "いし"] },
-  { text: "ねこに ( ___ )", correct: "こばん", options: ["こばん", "おかし", "おもちゃ", "みず"] },
-  { text: "かえるの こは ( ___ )", correct: "かえる", options: ["かえる", "おたまじゃくし", "さかな", "とり"] },
-  { text: "みっか ( ___ )", correct: "ぼうず", options: ["ぼうず", "おじさん", "こども", "せんせい"] },
-  { text: "いしの うえにも ( ___ ) ねん", correct: "さん", options: ["さん", "いち", "じゅう", "ひゃく"] },
-  { text: "わらう かどには ( ___ ) きたる", correct: "ふく", options: ["ふく", "かね", "かみ", "ひと"] },
-  { text: "はなより ( ___ )", correct: "だんご", options: ["だんご", "おかし", "ジュース", "みかん"] },
-  { text: "あたまを ( ___ )", correct: "ひやす", options: ["ひやす", "たたく", "なでる", "あたたまる"] },
-  { text: "てを ( ___ )", correct: "たたく", options: ["たたく", "あらう", "あげる", "ひっぱる"] },
-  { text: "めを ( ___ ) する", correct: "まるく", options: ["まるく", "しかくに", "ながく", "ちいさく"] },
-  { text: "みみを ( ___ )", correct: "すます", options: ["すます", "あける", "とじる", "たたむ"] },
-  { text: "くちを ( ___ )", correct: "つぐむ", options: ["つぐむ", "ひらく", "わらう", "うたう"] },
-  { text: "はなが ( ___ )", correct: "たかい", options: ["たかい", "ひくい", "ながい", "ふとい"] },
-  { text: "こころを ( ___ ) に する", correct: "ひとつ", options: ["ひとつ", "ふたつ", "みっつ", "とお"] },
-  { text: "おにの めにも ( ___ )", correct: "なみだ", options: ["なみだ", "あせ", "えがお", "いかり"] },
-  { text: "どんぐりの ( ___ ) くらべ", correct: "せい", options: ["せい", "かお", "あたま", "て"] },
-  { text: "ななころび ( ___ ) おき", correct: "や", options: ["や", "む", "ご", "く"] },
-  { text: "うまの みみに ( ___ )", correct: "ねんぶつ", options: ["ねんぶつ", "おんがく", "うた", "はなし"] },
-  { text: "ぶたに ( ___ )", correct: "しんじゅ", options: ["しんじゅ", "りんご", "おかし", "はな"] },
-  { text: "とらぬ たぬきの ( ___ )", correct: "かわざんよう", options: ["かわざんよう", "けいさん", "おはなし", "かお"] },
-  { text: "すずめの ( ___ )", correct: "なみだ", options: ["なみだ", "えがお", "はね", "こえ"] },
-  { text: "かべに みみあり しょうじに ( ___ )", correct: "めあり", options: ["めあり", "くちあり", "はなあり", "てあり"] },
-  { text: "めの うえの ( ___ )", correct: "たんこぶ", options: ["たんこぶ", "まつげ", "まゆげ", "ぼうし"] },
-  { text: "むかし とった ( ___ )", correct: "きねづか", options: ["きねづか", "しゃしん", "きんメダル", "てがみ"] },
-  { text: "ちょうちんに ( ___ )", correct: "つりがね", options: ["つりがね", "でんき", "ろうそく", "ひかり"] },
-  { text: "ぬかに ( ___ )", correct: "くぎ", options: ["くぎ", "いし", "みず", "しお"] },
-  { text: "つきと ( ___ )", correct: "すっぽん", options: ["すっぽん", "たいよう", "ほし", "くも"] }
-];
+  { text: "🚂 は どう かく？", say: "きしゃ", correct: "きしゃ", options: ["きしゃ", "きしや", "きしょ", "きしゅ"] },
+  { text: "きし( ___ ) 🚂", say: "きしゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "📷 は どう かく？", say: "しゃしん", correct: "しゃしん", options: ["しゃしん", "しやしん", "しゅしん", "しょしん"] },
+  { text: "し( ___ )しん 📷", say: "しゃしん", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🚲 は どう かく？", say: "じてんしゃ", correct: "じてんしゃ", options: ["じてんしゃ", "じてんしょ", "じてんしゅ", "じてんしや"] },
+  { text: "じてんし( ___ ) 🚲", say: "じてんしゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🚃 は どう かく？", say: "でんしゃ", correct: "でんしゃ", options: ["でんしゃ", "でんしゅ", "でんしや", "でんしょ"] },
+  { text: "でんし( ___ ) 🚃", say: "でんしゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🍵 は どう かく？", say: "おちゃ", correct: "おちゃ", options: ["おちゃ", "おちょ", "おちゅ", "おちや"] },
+  { text: "おち( ___ ) 🍵", say: "おちゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🥷 は どう かく？", say: "にんじゃ", correct: "にんじゃ", options: ["にんじゃ", "にんじや", "にんじょ", "にんじゅ"] },
+  { text: "にんじ( ___ ) 🥷", say: "にんじゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🚑 は どう かく？", say: "きゅうきゅうしゃ", correct: "きゅうきゅうしゃ", options: ["きゅうきゅうしゃ", "きゅうきゅうしょ", "きゅうきょうしゃ", "きゅうきゅうしや"] },
+  { text: "き( ___ )うきゅうしゃ 🚑", say: "きゅうきゅうしゃ", correct: "ゅ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🚒 は どう かく？", say: "しょうぼうしゃ", correct: "しょうぼうしゃ", options: ["しょうぼうしゃ", "しようぼうしゃ", "しょうぼうしょ", "しゅうぼうしゃ"] },
+  { text: "しょうぼうし( ___ ) 🚒", say: "しょうぼうしゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🥒 は どう かく？", say: "きゅうり", correct: "きゅうり", options: ["きゅうり", "きゆうり", "きゃうり", "きょうり"] },
+  { text: "き( ___ )うり 🥒", say: "きゅうり", correct: "ゅ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🥛 は どう かく？", say: "ぎゅうにゅう", correct: "ぎゅうにゅう", options: ["ぎゅうにゅう", "ぎゅうにゆう", "ぎゅうにゃう", "ぎゅうにょう"] },
+  { text: "ぎゅうに( ___ )う 🥛", say: "ぎゅうにゅう", correct: "ゅ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "💉 は どう かく？", say: "ちゅうしゃ", correct: "ちゅうしゃ", options: ["ちゅうしゃ", "ちゅうしや", "ちゃうしゃ", "ちょうしゃ"] },
+  { text: "ちゅうし( ___ ) 💉", say: "ちゅうしゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🐉 は どう かく？", say: "りゅう", correct: "りゅう", options: ["りゅう", "りゃう", "りゆう", "りょう"] },
+  { text: "り( ___ )う 🐉", say: "りゅう", correct: "ゅ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🦋 は どう かく？", say: "ちょうちょ", correct: "ちょうちょ", options: ["ちょうちょ", "ちょうちよ", "ちょうちゃ", "ちゃうちょ"] },
+  { text: "ち( ___ )うちょ 🦋", say: "ちょうちょ", correct: "ょ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🏥 は どう かく？", say: "びょういん", correct: "びょういん", options: ["びょういん", "びゃういん", "びゅういん", "びよういん"] },
+  { text: "び( ___ )ういん 🏥", say: "びょういん", correct: "ょ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "💯 は どう かく？", say: "ひゃく", correct: "ひゃく", options: ["ひゃく", "ひゅく", "ひやく", "ひょく"] },
+  { text: "ひ( ___ )く 💯", say: "ひゃく", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🦕 は どう かく？", say: "きょうりゅう", correct: "きょうりゅう", options: ["きょうりゅう", "きょうりょう", "きゃうりゅう", "きようりゅう"] },
+  { text: "き( ___ )うりゅう 🦕", say: "きょうりゅう", correct: "ょ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🧸 は どう かく？", say: "おもちゃ", correct: "おもちゃ", options: ["おもちゃ", "おもちょ", "おもちゅ", "おもちや"] },
+  { text: "おもち( ___ ) 🧸", say: "おもちゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🎃 は どう かく？", say: "かぼちゃ", correct: "かぼちゃ", options: ["かぼちゃ", "かぼちょ", "かぼちゅ", "かぼちや"] },
+  { text: "かぼち( ___ ) 🎃", say: "かぼちゃ", correct: "ゃ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "🍞 は どう かく？", say: "しょくぱん", correct: "しょくぱん", options: ["しょくぱん", "しゃくぱん", "しゅくぱん", "しよくぱん"] },
+  { text: "し( ___ )くぱん 🍞", say: "しょくぱん", correct: "ょ", options: ["ゃ", "ゅ", "ょ", "っ"] },
+  { text: "👕 は どう かく？", say: "シャツ", correct: "シャツ", options: ["シャツ", "ショツ", "シュツ", "シヤツ"] },
+  { text: "シ( ___ )ツ 👕", say: "シャツ", correct: "ャ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🧃 は どう かく？", say: "ジュース", correct: "ジュース", options: ["ジュース", "ジユース", "ジョース", "ジャース"] },
+  { text: "ジ( ___ )ース 🧃", say: "ジュース", correct: "ュ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🍫 は どう かく？", say: "チョコレート", correct: "チョコレート", options: ["チョコレート", "チュコレート", "チヨコレート", "チャコレート"] },
+  { text: "チ( ___ )コレート 🍫", say: "チョコレート", correct: "ョ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🍬 は どう かく？", say: "キャンディ", correct: "キャンディ", options: ["キャンディ", "キャンデォ", "キャンデイ", "キヤンディ"] },
+  { text: "キ( ___ )ンディ 🍬", say: "キャンディ", correct: "ャ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🍴 は どう かく？", say: "フォーク", correct: "フォーク", options: ["フォーク", "フィーク", "フェーク", "フオーク"] },
+  { text: "フ( ___ )ーク 🍴", say: "フォーク", correct: "ォ", options: ["ィ", "ェ", "ォ", "ッ"] },
+  { text: "🚿 は どう かく？", say: "シャワー", correct: "シャワー", options: ["シャワー", "シュワー", "シヤワー", "ショワー"] },
+  { text: "シ( ___ )ワー 🚿", say: "シャワー", correct: "ャ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🍯 は どう かく？", say: "ジャム", correct: "ジャム", options: ["ジャム", "ジヤム", "ジュム", "ジョム"] },
+  { text: "ジ( ___ )ム 🍯", say: "ジャム", correct: "ャ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🧻 は どう かく？", say: "ティッシュ", correct: "ティッシュ", options: ["ティッシュ", "ティッシユ", "ティシュ", "ティッシャ"] },
+  { text: "ティッシ( ___ ) 🧻", say: "ティッシュ", correct: "ュ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "👘 は どう かく？", say: "パジャマ", correct: "パジャマ", options: ["パジャマ", "パジュマ", "パジヤマ", "パジョマ"] },
+  { text: "パジ( ___ )マ 👘", say: "パジャマ", correct: "ャ", options: ["ャ", "ュ", "ョ", "ッ"] },
+  { text: "🌭 は どう かく？", say: "ウィンナー", correct: "ウィンナー", options: ["ウィンナー", "ウインナー", "ウォンナー", "ウェンナー"] },
+  { text: "ウ( ___ )ンナー 🌭", say: "ウィンナー", correct: "ィ", options: ["ィ", "ェ", "ォ", "ッ"] },
+  { text: "⛴️ は どう かく？", say: "フェリー", correct: "フェリー", options: ["フェリー", "フォリー", "フエリー", "フィリー"] },
+  { text: "フ( ___ )リー ⛴️", say: "フェリー", correct: "ェ", options: ["ィ", "ェ", "ォ", "ッ"] },
+  { text: "🌷 は どう かく？", say: "チューリップ", correct: "チューリップ", options: ["チューリップ", "チューリプ", "チューリツプ", "チョーリップ"] },
+  { text: "チューリ( ___ )プ 🌷", say: "チューリップ", correct: "ッ", options: ["ャ", "ュ", "ョ", "ッ"] }
+]
   function getPokemonImageUrl(id) { return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`; }
 
 let isAppliedMode = false;
@@ -1159,7 +1203,7 @@ function showNextQuestion() {
     if (currentQIndex === 0) renderQuestionCard(contentEl, appliedQ1, "かんじを よんでみよう！");
     else if (currentQIndex === 1) renderQuestionCard(contentEl, appliedQ2, "ぴったりな ことばを えらぼう！");
     else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "ことばの クイズ！");
-    else renderQuestionCard(contentEl, appliedQ4, "ことわざを えらぼう！");
+    else renderQuestionCard(contentEl, appliedQ4, "ちいさい じの クイズ！");
   }
   buddyOnQuestion();
 }
@@ -1177,6 +1221,7 @@ function renderQuestionCard(container, dataList, titleText) {
   `;
 
   document.getElementById('q-voice-btn').onclick = () => {
+    if (q.say) { speakJapaneseVoice(q.say); return; } // よみかたが きまっている もんだい（ちいさい じ）
     let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
     
     // 絵文字を完全に除去（サロゲートペア対応）
@@ -1206,7 +1251,7 @@ function renderQuestionCard(container, dataList, titleText) {
     optsGrid.appendChild(btn);
   });
 
-  setTimeout(() => { document.getElementById('q-voice-btn').click(); }, 300);
+  setTimeout(() => { const vb = document.getElementById('q-voice-btn'); if (vb) vb.click(); }, 300);
 }
 
 // =========================================================
@@ -1362,6 +1407,47 @@ function checkAnswer(isCorrect, answerText) {
     if (isCorrect) { currentQIndex++; showNextQuestion(); }
   }, 2200);
 }
+
+// ==== EMOJI-3D START ====
+// もんだいの なかの えもじを、どの スマホでも おなじに みえる 3Dの え（Microsoft Fluent Emoji, MIT ライセンス）に おきかえる
+const EMOJI_BASE = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/1ffb34c752ecf5d402f04cfb4b392c77f57c54bc/';
+const EMOJI_IMG = {"🐦‍⬛": "assets/Blackbird/3D/blackbird_3d.png","👁️": "assets/Eye/3D/eye_3d.png","🛏️": "assets/Bed/3D/bed_3d.png","✈️": "assets/Airplane/3D/airplane_3d.png","🖐️": "assets/Hand with fingers splayed/Default/3D/hand_with_fingers_splayed_3d_default.png","☎️": "assets/Telephone/3D/telephone_3d.png","✂️": "assets/Scissors/3D/scissors_3d.png","🍽️": "assets/Fork and knife with plate/3D/fork_and_knife_with_plate_3d.png","✏️": "assets/Pencil/3D/pencil_3d.png","☂️": "assets/Umbrella/3D/umbrella_3d.png","⛴️": "assets/Ferry/3D/ferry_3d.png","☁️": "assets/Cloud/3D/cloud_3d.png","🖊️": "assets/Pen/3D/pen_3d.png","☀️": "assets/Sun/3D/sun_3d.png","🍌": "assets/Banana/3D/banana_3d.png","🍎": "assets/Red apple/3D/red_apple_3d.png","👁": "assets/Eye/3D/eye_3d.png","⛄": "assets/Snowman without snow/3D/snowman_without_snow_3d.png","🔔": "assets/Bell/3D/bell_3d.png","📖": "assets/Open book/3D/open_book_3d.png","⚽": "assets/Soccer ball/3D/soccer_ball_3d.png","🍓": "assets/Strawberry/3D/strawberry_3d.png","⬛": "assets/Black large square/3D/black_large_square_3d.png","🦁": "assets/Lion/3D/lion_3d.png","🐴": "assets/Horse face/3D/horse_face_3d.png","👘": "assets/Kimono/3D/kimono_3d.png","🚢": "assets/Ship/3D/ship_3d.png","🥩": "assets/Cut of meat/3D/cut_of_meat_3d.png","🧦": "assets/Socks/3D/socks_3d.png","🛏": "assets/Bed/3D/bed_3d.png","🚃": "assets/Railway car/3D/railway_car_3d.png","👕": "assets/T-shirt/3D/t-shirt_3d.png","✈": "assets/Airplane/3D/airplane_3d.png","🍣": "assets/Sushi/3D/sushi_3d.png","🚂": "assets/Locomotive/3D/locomotive_3d.png","🖐": "assets/Hand with fingers splayed/Default/3D/hand_with_fingers_splayed_3d_default.png","🐶": "assets/Dog face/3D/dog_face_3d.png","🧤": "assets/Gloves/3D/gloves_3d.png","🥚": "assets/Egg/3D/egg_3d.png","🍬": "assets/Candy/3D/candy_3d.png","🔵": "assets/Blue circle/3D/blue_circle_3d.png","🐛": "assets/Bug/3D/bug_3d.png","🥄": "assets/Spoon/3D/spoon_3d.png","🪞": "assets/Mirror/3D/mirror_3d.png","🍰": "assets/Shortcake/3D/shortcake_3d.png","🦶": "assets/Foot/Default/3D/foot_3d_default.png","📄": "assets/Page facing up/3D/page_facing_up_3d.png","👓": "assets/Glasses/3D/glasses_3d.png","🐘": "assets/Elephant/3D/elephant_3d.png","🧢": "assets/Billed cap/3D/billed_cap_3d.png","🌹": "assets/Rose/3D/rose_3d.png","🚒": "assets/Fire engine/3D/fire_engine_3d.png","🐸": "assets/Frog/3D/frog_3d.png","🎹": "assets/Musical keyboard/3D/musical_keyboard_3d.png","🐔": "assets/Chicken/3D/chicken_3d.png","🔴": "assets/Red circle/3D/red_circle_3d.png","🪲": "assets/Beetle/3D/beetle_3d.png","🎃": "assets/Jack-o-lantern/3D/jack-o-lantern_3d.png","🚑": "assets/Ambulance/3D/ambulance_3d.png","📓": "assets/Notebook/3D/notebook_3d.png","🥕": "assets/Carrot/3D/carrot_3d.png","🦋": "assets/Butterfly/3D/butterfly_3d.png","💧": "assets/Droplet/3D/droplet_3d.png","🌳": "assets/Deciduous tree/3D/deciduous_tree_3d.png","🐜": "assets/Ant/3D/ant_3d.png","🍉": "assets/Watermelon/3D/watermelon_3d.png","💉": "assets/Syringe/3D/syringe_3d.png","☎": "assets/Telephone/3D/telephone_3d.png","🥒": "assets/Cucumber/3D/cucumber_3d.png","🚿": "assets/Shower/3D/shower_3d.png","✂": "assets/Scissors/3D/scissors_3d.png","🍘": "assets/Rice cracker/3D/rice_cracker_3d.png","🍇": "assets/Grapes/3D/grapes_3d.png","🚌": "assets/Bus/3D/bus_3d.png","🐱": "assets/Cat face/3D/cat_face_3d.png","🐧": "assets/Penguin/3D/penguin_3d.png","⭕": "assets/Hollow red circle/3D/hollow_red_circle_3d.png","🍞": "assets/Bread/3D/bread_3d.png","🥬": "assets/Leafy green/3D/leafy_green_3d.png","🍙": "assets/Rice ball/3D/rice_ball_3d.png","🌷": "assets/Tulip/3D/tulip_3d.png","🏥": "assets/Hospital/3D/hospital_3d.png","🌻": "assets/Sunflower/3D/sunflower_3d.png","🥛": "assets/Glass of milk/3D/glass_of_milk_3d.png","☔": "assets/Umbrella with rain drops/3D/umbrella_with_rain_drops_3d.png","🪑": "assets/Chair/3D/chair_3d.png","🌭": "assets/Hot dog/3D/hot_dog_3d.png","🍊": "assets/Tangerine/3D/tangerine_3d.png","🚗": "assets/Automobile/3D/automobile_3d.png","❌": "assets/Cross mark/3D/cross_mark_3d.png","📚": "assets/Books/3D/books_3d.png","🏠": "assets/House/3D/house_3d.png","🦒": "assets/Giraffe/3D/giraffe_3d.png","📺": "assets/Television/3D/television_3d.png","🍅": "assets/Tomato/3D/tomato_3d.png","🐮": "assets/Cow face/3D/cow_face_3d.png","📷": "assets/Camera/3D/camera_3d.png","⌚": "assets/Watch/3D/watch_3d.png","📮": "assets/Postbox/3D/postbox_3d.png","🧃": "assets/Beverage box/3D/beverage_box_3d.png","🍽": "assets/Fork and knife with plate/3D/fork_and_knife_with_plate_3d.png","🍯": "assets/Honey pot/3D/honey_pot_3d.png","🥢": "assets/Chopsticks/3D/chopsticks_3d.png","🍚": "assets/Cooked rice/3D/cooked_rice_3d.png","🧻": "assets/Roll of paper/3D/roll_of_paper_3d.png","🦕": "assets/Sauropod/3D/sauropod_3d.png","🚲": "assets/Bicycle/3D/bicycle_3d.png","👖": "assets/Jeans/3D/jeans_3d.png","👟": "assets/Running shoe/3D/running_shoe_3d.png","🍴": "assets/Fork and knife/3D/fork_and_knife_3d.png","🐰": "assets/Rabbit face/3D/rabbit_face_3d.png","✏": "assets/Pencil/3D/pencil_3d.png","🐉": "assets/Dragon/3D/dragon_3d.png","🍡": "assets/Dango/3D/dango_3d.png","💯": "assets/Hundred points/3D/hundred_points_3d.png","☂": "assets/Umbrella/3D/umbrella_3d.png","🍫": "assets/Chocolate bar/3D/chocolate_bar_3d.png","🥁": "assets/Drum/3D/drum_3d.png","⛴": "assets/Ferry/3D/ferry_3d.png","☁": "assets/Cloud/3D/cloud_3d.png","🟡": "assets/Yellow circle/3D/yellow_circle_3d.png","🍦": "assets/Soft ice cream/3D/soft_ice_cream_3d.png","🧸": "assets/Teddy bear/3D/teddy_bear_3d.png","🍪": "assets/Cookie/3D/cookie_3d.png","🖊": "assets/Pen/3D/pen_3d.png","🐦": "assets/Bird/3D/bird_3d.png","☀": "assets/Sun/3D/sun_3d.png","📏": "assets/Straight ruler/3D/straight_ruler_3d.png","🎵": "assets/Musical note/3D/musical_note_3d.png","🍵": "assets/Teacup without handle/3D/teacup_without_handle_3d.png","🧽": "assets/Sponge/3D/sponge_3d.png","🥷": "assets/Ninja/Default/3D/ninja_3d_default.png","🐟": "assets/Fish/3D/fish_3d.png","🥤": "assets/Cup with straw/3D/cup_with_straw_3d.png"};
+const EMOJI_RE = /(?:\p{Extended_Pictographic}|\p{Regional_Indicator}{2}|[0-9#*]\uFE0F?\u20E3)(?:\uFE0F|\u200D\p{Extended_Pictographic}|[\u{1F3FB}-\u{1F3FF}])*/gu;
+function emojiSrc(e) {
+  const p = EMOJI_IMG[e] || EMOJI_IMG[e.replace(/\uFE0F/g, '')] || EMOJI_IMG[e + '\uFE0F'];
+  return p ? EMOJI_BASE + encodeURI(p) : null;
+}
+function emojify(root) {
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) { EMOJI_RE.lastIndex = 0; if (EMOJI_RE.test(walker.currentNode.nodeValue)) nodes.push(walker.currentNode); }
+  nodes.forEach(node => {
+    const frag = document.createDocumentFragment();
+    let last = 0; const text = node.nodeValue;
+    text.replace(EMOJI_RE, (m, offset) => {
+      const src = emojiSrc(m);
+      if (!src) return m;
+      if (offset > last) frag.appendChild(document.createTextNode(text.slice(last, offset)));
+      const img = document.createElement('img');
+      img.className = 'emo'; img.src = src; img.alt = m; img.draggable = false;
+      img.onerror = () => { img.replaceWith(document.createTextNode(m)); }; // よみこめなかったら もとの えもじ
+      frag.appendChild(img);
+      last = offset + m.length;
+      return m;
+    });
+    if (last === 0) return;
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    node.replaceWith(frag);
+  });
+}
+// がめんが かわったら じどうで おきかえる
+['quiz-content', 'feedback-text'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  new MutationObserver(() => emojify(el)).observe(el, { childList: true, subtree: true, characterData: true });
+});
+// ==== EMOJI-3D END ====
 
 setMuted(isMuted);
 setModeButtons();
