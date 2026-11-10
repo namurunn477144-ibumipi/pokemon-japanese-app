@@ -264,11 +264,11 @@ const baseQ2 = [
   { text: "「ひとつ」の<br>つぎは？", correct: "ふたつ", options: ["ふたつ", "みっつ", "よっつ", "いつつ"] },
   { text: "「ふたつ」の<br>つぎは？", correct: "みっつ", options: ["みっつ", "よっつ", "いつつ", "むっつ"] },
   { text: "「みっつ」の<br>つぎは？", correct: "よっつ", options: ["よっつ", "いつつ", "むっつ", "ななつ"] },
-  { text: "「よっつ」の<br>つぎは？", correct: "いつつ", options: ["いつつ", "むっつ", "ななつ", "やつ"] },
-  { text: "「いつつ」の<br>つぎは？", correct: "むっつ", options: ["むっつ", "ななつ", "やつ", "ここのつ"] },
-  { text: "「むっつ」の<br>つぎは？", correct: "ななつ", options: ["ななつ", "やつ", "ここのつ", "とお"] },
-  { text: "「ななつ」の<br>つぎは？", correct: "やつ", options: ["やつ", "ここのつ", "とお", "ふたつ"] },
-  { text: "「ここのつ」の<br>つぎは？", correct: "とお", options: ["とお", "やつ", "ななつ", "ひとつ"] }
+  { text: "「よっつ」の<br>つぎは？", correct: "いつつ", options: ["いつつ", "むっつ", "ななつ", "やっつ"] },
+  { text: "「いつつ」の<br>つぎは？", correct: "むっつ", options: ["むっつ", "ななつ", "やっつ", "ここのつ"] },
+  { text: "「むっつ」の<br>つぎは？", correct: "ななつ", options: ["ななつ", "やっつ", "ここのつ", "とお"] },
+  { text: "「ななつ」の<br>つぎは？", correct: "やっつ", options: ["やっつ", "ここのつ", "とお", "ふたつ"] },
+  { text: "「ここのつ」の<br>つぎは？", correct: "とお", options: ["とお", "やっつ", "ななつ", "ひとつ"] }
 ];
 
 const baseQ3 = [
@@ -450,11 +450,11 @@ const appliedQ2 = [
   { text: "おふろで ( ___ )<br>あたたまる", correct: "ぽかぽか", options: ["ぽかぽか", "ざーざー", "からから", "ぺこぺこ"] },
   { text: "ゆきが ( ___ )<br>ふる", correct: "しんしん", options: ["しんしん", "ざーざー", "もりもり", "にこにこ"] },
   { text: "はを ( ___ )<br>みがく", correct: "ごしごし", options: ["ごしごし", "すやすや", "きらきら", "ころころ"] },
-  { text: "そうじきで ( ___ )<br>すう", correct: "ぐんぐん", options: ["ぐんぐん", "にこにこ", "すやすや", "からから"] },
+  { text: "ドアを ( ___ )<br>たたく", correct: "とんとん", options: ["とんとん", "にこにこ", "すやすや", "からから"] },
   { text: "あせが ( ___ )<br>でる", correct: "びっしょり", options: ["びっしょり", "すやすや", "にこにこ", "ころころ"] },
   { text: "おもちゃが ( ___ )<br>ちらかる", correct: "ばらばら", options: ["ばらばら", "もりもり", "ぽかぽか", "すらすら"] },
   { text: "むねが ( ___ )<br>する", correct: "どきどき", options: ["どきどき", "ざーざー", "ごろごろ", "からから"] },
-  { text: "スープが ( ___ )<br>する", correct: "あつあつ", options: ["あつあつ", "すやすや", "さらさら", "てくてく"] },
+  { text: "あつい スープを ( ___ )<br>さます", correct: "ふうふう", options: ["ふうふう", "すやすや", "さらさら", "てくてく"] },
   { text: "ふうせんが ( ___ )<br>とぶ", correct: "ふわふわ", options: ["ふわふわ", "ごろごろ", "ざーざー", "ドタドタ"] },
   { text: "なみだが ( ___ )<br>でる", correct: "ぽろぽろ", options: ["ぽろぽろ", "ざーざー", "からから", "ぺこぺこ"] },
   { text: "みずを ( ___ )<br>のむ", correct: "ごくごく", options: ["ごくごく", "すやすや", "きらきら", "ころころ"] }
@@ -462,21 +462,21 @@ const appliedQ2 = [
 
 // 3. カタカナ・なかまわけ（30問）
 const appliedQ3 = [
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "バナナ 🍌", options: ["バナナ 🍌", "りんご 🍎", "みかん 🍊", "ぶどう 🍇"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "バス 🚌", options: ["バス 🚌", "くるま 🚗", "でんしゃ 🚃", "ふね 🚢"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ライオン 🦁", options: ["ライオン 🦁", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "テレビ 📺", options: ["テレビ 📺", "ほん 📖", "つくえ 🪑", "くつ 👟"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "コップ 🥤", options: ["コップ 🥤", "おさら 🍽️", "おはし 🥢", "かさ ☂️"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ピアノ 🎹", options: ["ピアノ 🎹", "ふえ 🎵", "たいこ 🥁", "すず 🔔"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "シャツ 👕", options: ["シャツ 👕", "くつした 🧦", "ぼうし 🧢", "てぶくろ 🧤"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ズボン 👖", options: ["ズボン 👖", "くつ 👟", "めがね 👓", "うでどけい ⌚"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ノート 📓", options: ["ノート 📓", "えんぴつ ✏️", "はさみ ✂️", "ほん 📖"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ベッド 🛏️", options: ["ベッド 🛏️", "いす 🪑", "つくえ 🪑", "かがみ 🪞"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "アイス 🍦", options: ["アイス 🍦", "おにぎり 🍙", "おすし 🍣", "たまご 🥚"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ジュース 🧃", options: ["ジュース 🧃", "みず 💧", "おちゃ 🍵", "ぎゅうにゅう 🥛"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "カメラ 📷", options: ["カメラ 📷", "とけい ⌚", "でんわ ☎️", "ほん 📖"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "ケーキ 🍰", options: ["ケーキ 🍰", "だんご 🍡", "せんべい 🍘", "あめ 🍬"] },
-  { text: "カタカナで かくのは<br>どちらかな？", correct: "スプーン 🥄", options: ["スプーン 🥄", "おはし 🥢", "おさら 🍽️", "ちゃわん 🍚"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "バナナ 🍌", options: ["バナナ 🍌", "りんご 🍎", "みかん 🍊", "ぶどう 🍇"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "バス 🚌", options: ["バス 🚌", "くるま 🚗", "でんしゃ 🚃", "ふね 🚢"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ライオン 🦁", options: ["ライオン 🦁", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "テレビ 📺", options: ["テレビ 📺", "ほん 📖", "つくえ 🪑", "くつ 👟"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "コップ 🥤", options: ["コップ 🥤", "おさら 🍽️", "おはし 🥢", "かさ ☂️"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ピアノ 🎹", options: ["ピアノ 🎹", "ふえ 🎵", "たいこ 🥁", "すず 🔔"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "シャツ 👕", options: ["シャツ 👕", "くつした 🧦", "ぼうし 🧢", "てぶくろ 🧤"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ズボン 👖", options: ["ズボン 👖", "くつ 👟", "めがね 👓", "うでどけい ⌚"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ノート 📓", options: ["ノート 📓", "えんぴつ ✏️", "はさみ ✂️", "ほん 📖"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ベッド 🛏️", options: ["ベッド 🛏️", "いす 🪑", "つくえ 🪑", "かがみ 🪞"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "アイス 🍦", options: ["アイス 🍦", "おにぎり 🍙", "おすし 🍣", "たまご 🥚"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ジュース 🧃", options: ["ジュース 🧃", "みず 💧", "おちゃ 🍵", "ぎゅうにゅう 🥛"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "カメラ 📷", options: ["カメラ 📷", "とけい ⌚", "でんわ ☎️", "ほん 📖"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "ケーキ 🍰", options: ["ケーキ 🍰", "だんご 🍡", "せんべい 🍘", "あめ 🍬"] },
+  { text: "カタカナで かくのは<br>どれかな？", correct: "スプーン 🥄", options: ["スプーン 🥄", "おはし 🥢", "おさら 🍽️", "ちゃわん 🍚"] },
   { text: "なかまはずれは<br>どれかな？", correct: "くるま 🚗", options: ["くるま 🚗", "いぬ 🐶", "ねこ 🐱", "うさぎ 🐰"] },
   { text: "なかまはずれは<br>どれかな？", correct: "りんご 🍎", options: ["りんご 🍎", "バス 🚌", "でんしゃ 🚃", "ひこうき ✈️"] },
   { text: "なかまはずれは<br>どれかな？", correct: "さかな 🐟", options: ["さかな 🐟", "チューリップ 🌷", "ひまわり 🌻", "バラ 🌹"] },
@@ -514,8 +514,8 @@ const appliedQ4 = [
   { text: "はなが ( ___ )", correct: "たかい", options: ["たかい", "ひくい", "ながい", "ふとい"] },
   { text: "こころを ( ___ ) に する", correct: "ひとつ", options: ["ひとつ", "ふたつ", "みっつ", "とお"] },
   { text: "おにの めにも ( ___ )", correct: "なみだ", options: ["なみだ", "あせ", "えがお", "いかり"] },
-  { text: "どんぐりの ( ___ ) くらべ", correct: "せいくらべ", options: ["せいくらべ", "かおくらべ", "あたまくらべ", "てくらべ"] },
-  { text: "ななころび ( ___ ) おき", correct: "やおき", options: ["やおき", "むおき", "ごおき", "くおき"] },
+  { text: "どんぐりの ( ___ ) くらべ", correct: "せい", options: ["せい", "かお", "あたま", "て"] },
+  { text: "ななころび ( ___ ) おき", correct: "や", options: ["や", "む", "ご", "く"] },
   { text: "うまの みみに ( ___ )", correct: "ねんぶつ", options: ["ねんぶつ", "おんがく", "うた", "はなし"] },
   { text: "ぶたに ( ___ )", correct: "しんじゅ", options: ["しんじゅ", "りんご", "おかし", "はな"] },
   { text: "とらぬ たぬきの ( ___ )", correct: "かわざんよう", options: ["かわざんよう", "けいさん", "おはなし", "かお"] },
@@ -533,8 +533,97 @@ let isAppliedMode = false;
 let baseState = { exp: 0, keys: 0, isEvolved: false, partnerId: 133, partnerName: "イーブイ", foods: [] };
 let appliedState = { exp: 0, keys: 0, stage: 0, familyIdx: -1, foods: [] };
 
+// =========================================================
+// ▼▼ よみあげ（こえ）の しくみ ▼▼
+//  - あたらしく しゃべる まえに、まえの こえを かならず とめる
+//  - 「まえはん → ま → うしろはん」の よみあげも、つぎの もんだいに すすんだら とめる
+//  - iPhone は さいしょの タップで こえを「じゅんび」しておく
+// =========================================================
+const VOICE_PREFS = {
+  en: ["Samantha", "Karen", "Google US English", "Microsoft Aria", "Microsoft Jenny", "Microsoft Zira"],
+  ja: ["Kyoko", "O-Ren", "Google 日本語", "Microsoft Nanami", "Microsoft Haruka"]
+};
+const VOICE_SETTINGS = { en: { rate: 0.8, pitch: 1.1 }, ja: { rate: 0.95, pitch: 1.1 } };
+const hasSpeech = ('speechSynthesis' in window) && (typeof SpeechSynthesisUtterance !== 'undefined');
 let synthVoices = [];
-window.speechSynthesis.onvoiceschanged = () => { synthVoices = window.speechSynthesis.getVoices(); };
+let speechToken = 0;
+let speechTimers = [];
+let currentUtterance = null; // とちゅうで こえが きえないように さんしょうを もっておく
+
+function loadVoices() { if (hasSpeech) synthVoices = window.speechSynthesis.getVoices(); }
+if (hasSpeech) { loadVoices(); window.speechSynthesis.onvoiceschanged = loadVoices; }
+
+function pickVoice(lang) {
+  if (synthVoices.length === 0) loadVoices();
+  const norm = (v) => (v.lang || '').replace('_', '-').toLowerCase();
+  const matches = synthVoices.filter(v => norm(v).startsWith(lang));
+  for (const name of VOICE_PREFS[lang]) {
+    const v = matches.find(v => v.name.includes(name));
+    if (v) return v;
+  }
+  const region = lang === 'en' ? 'en-us' : 'ja-jp';
+  return matches.find(v => norm(v) === region) || matches[0] || null;
+}
+
+function stopSpeech() {
+  speechToken++;
+  speechTimers.forEach(clearTimeout); speechTimers = [];
+  if (hasSpeech && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) window.speechSynthesis.cancel();
+}
+
+// parts: [{ text: "...", lang: "en" | "ja", pauseAfter: ミリびょう }]
+function speakSequence(parts) {
+  if (!hasSpeech) return;
+  const wasBusy = window.speechSynthesis.speaking || window.speechSynthesis.pending;
+  stopSpeech();
+  const token = speechToken;
+  const list = parts.filter(p => p && p.text && String(p.text).trim());
+  const playAt = (i) => {
+    if (token !== speechToken || i >= list.length) return;
+    const p = list[i];
+    const msg = new SpeechSynthesisUtterance(p.text);
+    msg.lang = p.lang === 'en' ? 'en-US' : 'ja-JP';
+    const voice = pickVoice(p.lang);
+    if (voice) msg.voice = voice;
+    const s = VOICE_SETTINGS[p.lang];
+    msg.rate = s.rate; msg.pitch = s.pitch;
+    msg.onend = () => {
+      if (token !== speechToken) return;
+      speechTimers.push(setTimeout(() => playAt(i + 1), p.pauseAfter || 0));
+    };
+    currentUtterance = msg;
+    window.speechSynthesis.speak(msg);
+  };
+  // とめた ちょくごに すぐ しゃべると むしされる たんまつが あるので すこし まつ
+  if (wasBusy) speechTimers.push(setTimeout(() => playAt(0), 120));
+  else playAt(0);
+}
+function speakText(text, lang) { speakSequence([{ text, lang }]); }
+function speakEnglishVoice(text) { speakText(text, 'en'); }
+function speakJapaneseVoice(text) { speakText(text, 'ja'); }
+// ことばの ( ___ ) を「ま」に して よむ
+function speakWithBlank(text, lang) {
+  const parts = text.split('( ___ )');
+  speakSequence([{ text: parts[0].trim(), lang, pauseAfter: 900 }, { text: (parts[1] || '').trim(), lang }]);
+}
+
+function unlockSpeech() {
+  document.removeEventListener('touchend', unlockSpeech, true);
+  document.removeEventListener('click', unlockSpeech, true);
+  if (!hasSpeech || window.speechSynthesis.speaking) return;
+  const u = new SpeechSynthesisUtterance(' '); u.volume = 0;
+  window.speechSynthesis.speak(u);
+}
+document.addEventListener('touchend', unlockSpeech, true);
+document.addEventListener('click', unlockSpeech, true);
+
+// こたえボタンの れんだ たいさく
+let answerLocked = false;
+
+// すすみぐあいの ほぞん
+function saveProgress(key, data) { try { localStorage.setItem(key, JSON.stringify(data)); } catch (e) {} }
+function loadProgress(key) { try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+// =========================================================
 
 const roomView = document.getElementById('room-view'), quizView = document.getElementById('quiz-view');
 const foodListEl = document.getElementById('food-list'), expText = document.getElementById('exp-text'), expBar = document.getElementById('exp-bar');
@@ -574,7 +663,9 @@ function updateStageBackground() {
   }
 }
 
+const SAVE_KEY = 'kokugo-quiz-progress-v1';
 function renderRoom() {
+  saveProgress(SAVE_KEY, { isAppliedMode, baseState, appliedState });
   foodListEl.innerHTML = "";
   const currentPoke = getCurrentPoke();
   partnerImg.src = getPokemonImageUrl(currentPoke.id);
@@ -734,44 +825,9 @@ function showNextQuestion() {
   } else {
     if (currentQIndex === 0) renderQuestionCard(contentEl, appliedQ1, "かんじを よんでみよう！");
     else if (currentQIndex === 1) renderQuestionCard(contentEl, appliedQ2, "ぴったりな ことばを<br>えらぼう！");
-    else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "グループの なかまを<br>えらぼう！");
+    else if (currentQIndex === 2) renderQuestionCard(contentEl, appliedQ3, "ことばの クイズ！");
     else renderQuestionCard(contentEl, appliedQ4, "ことわざを えらぼう！");
   }
-}
-
-function speakTextWithBlank(text1, text2) {
-  const msg1 = new SpeechSynthesisUtterance(text1);
-  msg1.lang = 'ja-JP';
-  if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
-  const jaVoice = synthVoices.find(v => v.lang.startsWith('ja'));
-  if (jaVoice) msg1.voice = jaVoice;
-  msg1.pitch = 1.1; msg1.rate = 0.9;
-  
-  msg1.onend = () => {
-    setTimeout(() => {
-      if(text2) speakJapaneseVoice(text2);
-    }, 1000); // 無言で1秒待つ！
-  };
-  window.speechSynthesis.speak(msg1);
-}
-
-function speakJapaneseVoice(text) {
-  if (!text) return;
-  const msg = new SpeechSynthesisUtterance(text); msg.lang = 'ja-JP';
-  if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
-  const jaVoice = synthVoices.find(v => v.lang.startsWith('ja'));
-  if (jaVoice) msg.voice = jaVoice;
-  msg.pitch = 1.1; msg.rate = 0.9;
-  window.speechSynthesis.speak(msg);
-}
-
-function speakEnglishVoice(text) {
-  const msg = new SpeechSynthesisUtterance(text); msg.lang = 'en-US';
-  if (synthVoices.length === 0) synthVoices = window.speechSynthesis.getVoices();
-  const enVoice = synthVoices.find(v => v.lang.startsWith('en'));
-  if (enVoice) msg.voice = enVoice;
-  msg.pitch = 1.1; msg.rate = 0.8;
-  window.speechSynthesis.speak(msg);
 }
 
 function renderQuestionCard(container, dataList, titleText) {
@@ -790,7 +846,7 @@ function renderQuestionCard(container, dataList, titleText) {
     let cleanText = q.text.replace(/<br>/g, ' ').replace(/[。、]/g, '');
     
     // 絵文字を完全に除去（サロゲートペア対応）
-    cleanText = cleanText.replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF]|[\u2011-\u26FF]/g, '');
+    cleanText = cleanText.replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF]|[\u2011-\u26FF]|\uFE0F/g, '');
     
     // 漢字や日付けの「読みを問う問題」だけ「これ」に置換
     if (cleanText.includes('なんて よむ')) {
@@ -800,8 +856,7 @@ function renderQuestionCard(container, dataList, titleText) {
     const hasBlank = cleanText.includes('( ___ )');
 
     if (hasBlank) {
-      const parts = cleanText.split('( ___ )');
-      speakTextWithBlank(parts[0].trim(), parts[1] ? parts[1].trim() : "");
+      speakWithBlank(cleanText, 'ja');
     } else {
       speakJapaneseVoice(cleanText);
     }
@@ -818,6 +873,8 @@ function renderQuestionCard(container, dataList, titleText) {
 }
 
 function checkAnswer(isCorrect, answerText) {
+  if (answerLocked) return;
+  answerLocked = true;
   const overlay = document.getElementById('feedback-overlay'), icon = document.getElementById('feedback-icon'), text = document.getElementById('feedback-text');
   
   if (isCorrect) {
@@ -829,7 +886,7 @@ function checkAnswer(isCorrect, answerText) {
     if (/[a-zA-Z]/.test(voice)) speakEnglishVoice(voice); else speakJapaneseVoice(voice);
   } else {
     icon.innerText = "❌"; icon.style.color = "var(--incorrect)";
-    text.innerHTML = `${incorrectTexts[Math.floor(Math.random() * incorrectTexts.length)]}<br><span style="font-size:1.2rem; color:#666; display:block; margin-top:10px;">せいかいは：</span><span style="font-size:1.8rem; color:var(--primary-shadow); display:block;">${answerText}</span>`;
+    text.innerHTML = `${incorrectTexts[Math.floor(Math.random() * incorrectTexts.length)]}<br><span style="font-size:1.2rem; color:#666; display:block; margin-top:10px;">もういちど かんがえてみよう！</span>`;
     text.style.color = "var(--incorrect)";
     
     const voice = incorrectVoices[Math.floor(Math.random() * incorrectVoices.length)];
@@ -840,11 +897,21 @@ function checkAnswer(isCorrect, answerText) {
   
   setTimeout(() => {
     overlay.classList.remove('show');
+    answerLocked = false;
     if (isCorrect) { currentQIndex++; showNextQuestion(); }
   }, 1800); 
 }
 
-window.onload = () => { initBaseMode(); initAppliedMode(); renderRoom(); };
+window.onload = () => {
+  const saved = loadProgress(SAVE_KEY);
+  if (saved && saved.baseState && saved.appliedState && saved.appliedState.familyIdx >= 0) {
+    baseState = saved.baseState; appliedState = saved.appliedState;
+  } else {
+    initBaseMode(); initAppliedMode();
+  }
+  if (saved && saved.isAppliedMode === true) document.getElementById('mode-toggle-btn').onclick(); // チャレンジで おわっていたら もどす
+  else renderRoom();
+};
 </script>
 </body>
 </html>
